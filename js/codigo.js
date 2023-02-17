@@ -3,11 +3,15 @@
    botonSerJugador.addEventListener("click",seleccionarSerJugador)
  }
  function seleccionarSerJugador (){
-    if (document.getElementById('demonio').checked ){
+   let inputDemonio = document.getElementById('demonio')
+   let inputAngel = document.getElementById('angel')
+   let inputHumano = document.getElementById('humano')
+   
+   if (inputDemonio.checked ){
       alert('Bienvenido a casa Demonio')
-    } else if (document.getElementById('angel').checked ){
+    } else if (inputAngel.checked ){
       alert('Bienvenido a casa Angel')
-    } else if (document.getElementById('humano').checked ){
+    } else if (inputHumano.checked ){
       alert('Bienvenido a casa Humano')
     }
  }
