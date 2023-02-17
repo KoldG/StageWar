@@ -1,5 +1,10 @@
+ function iniciarJuego () {
+   let botonSerJugador = document.getElementById("serElegido")
+   botonSerJugador.addEventListener("click",seleccionarSerJugador)
+ }
  function seleccionarSerJugador (){
     alert("Elegiste ser...")
  }
- let botonSerJugador = document.getElementById("serElegido")
- botonSerJugador.addEventListener("click",seleccionarSerJugador)
+
+
+ window.addEventListener('load', iniciarJuego)
