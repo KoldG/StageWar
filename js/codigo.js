@@ -1,10 +1,55 @@
 let nombre = ""
-nombre = prompt("Ingresa tu nombre")
+ nombre = prompt("Ingresa tu nombre")
+let habilidadSer
+ 
  function iniciarJuego () {
    let botonSerJugador = document.getElementById("serElegido")
    botonSerJugador.addEventListener("click",seleccionarSerJugador)
+
+   let botonFuerza = document.getElementById('boton-fuerza')
+   botonFuerza.addEventListener('click', habilidadFuerza)
+   
+   let botonVelocidad = document.getElementById('boton-velocidad')
+   botonVelocidad.addEventListener('click', habilidadVelocidad)
+   
+   let botonInteligencia = document.getElementById('boton-inteligencia')
+   botonInteligencia.addEventListener('click', habilidadInteligencia)
+
    
    document.getElementById('nombreJugador').innerHTML = nombre   
+ }
+ function habilidadFuerza () {
+   
+   habilidadSer = 'Fuerza'
+   document.getElementById('habilidadJJ').innerHTML = 'Fuerza'
+   habilidadEnemigo ()
+ }
+ function habilidadVelocidad () {
+   habilidadSer = 'Velocidad'
+   document.getElementById('habilidadJJ').innerHTML = 'Velocidad'
+   habilidadEnemigo ()
+
+ }
+ function habilidadInteligencia () {
+   habilidadSer = 'Inteligencia'
+   document.getElementById('habilidadJJ').innerHTML = 'Inteligencia'
+   habilidadEnemigo ()
+
+ }
+
+ function habilidadEnemigo () {
+   
+   let habilidadEnemigo = aleatorio(1,3) 
+   let spanHabilidadEnemigo = document.getElementById('habilidadPC')
+   
+   if (habilidadEnemigo == 1){
+      spanHabilidadEnemigo.innerHTML = 'Fuerza'
+   } else if (habilidadEnemigo == 2) {
+      spanHabilidadEnemigo.innerHTML = 'Velocidad'
+   }else if (habilidadEnemigo ==3) {
+      spanHabilidadEnemigo.innerHTML = 'Inteligencia'
+   }
+
  }
 
  function seleccionarSerJugador (){
@@ -35,17 +80,24 @@ nombre = prompt("Ingresa tu nombre")
 
    if (serEnemigo == 1){
       spanSerEnemigo.innerHTML = 'Demonio'
+      document.getElementById('nombreJugadorK').innerHTML = nombre   
+
    } else if (serEnemigo == 2){
       spanSerEnemigo.innerHTML = 'Angel'
+      document.getElementById('nombreJugadorK').innerHTML = nombre   
+
    } else if (serEnemigo == 3){
       spanSerEnemigo.innerHTML = 'Humano'
+      document.getElementById('nombreJugadorK').innerHTML = nombre   
+
    }
  }
  function aleatorio(min,max){
     return Math.floor(Math.random() * (max - min + 1) + min)
  }
+ 
 
-  
+
 
  
 
