@@ -13,6 +13,8 @@
       alert('Bienvenido a casa Angel')
     } else if (inputHumano.checked ){
       alert('Bienvenido a casa Humano')
+    } else {
+      alert ('Selecciona cualquiera de los seres vivos')
     }
  }
 
