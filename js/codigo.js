@@ -1,7 +1,9 @@
 let nombre = ""
  nombre = prompt("Ingresa tu nombre")
 let habilidadSer
- 
+let habilidadEnemigo
+
+
  function iniciarJuego () {
    let botonSerJugador = document.getElementById("serElegido")
    botonSerJugador.addEventListener("click",seleccionarSerJugador)
@@ -22,22 +24,22 @@ let habilidadSer
    
    habilidadSer = 'Fuerza'
    document.getElementById('habilidadJJ').innerHTML = 'Fuerza'
-   habilidadEnemigo ()
+   habilidadAEnemigo ()
  }
  function habilidadVelocidad () {
    habilidadSer = 'Velocidad'
    document.getElementById('habilidadJJ').innerHTML = 'Velocidad'
-   habilidadEnemigo ()
+   habilidadAEnemigo ()
 
  }
  function habilidadInteligencia () {
    habilidadSer = 'Inteligencia'
    document.getElementById('habilidadJJ').innerHTML = 'Inteligencia'
-   habilidadEnemigo ()
+   habilidadAEnemigo ()
 
  }
 
- function habilidadEnemigo () {
+ function habilidadAEnemigo () {
    
    let habilidadEnemigo = aleatorio(1,3) 
    let spanHabilidadEnemigo = document.getElementById('habilidadPC')
