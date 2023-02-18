@@ -2,7 +2,7 @@ let nombre = ""
  nombre = prompt("Ingresa tu nombre")
 let habilidadSer
 let habilidadEnemigo
-
+let habilidadDEnemigo
 
  function iniciarJuego () {
    let botonSerJugador = document.getElementById("serElegido")
@@ -16,7 +16,7 @@ let habilidadEnemigo
    
    let botonInteligencia = document.getElementById('boton-inteligencia')
    botonInteligencia.addEventListener('click', habilidadInteligencia)
-
+  
    
    document.getElementById('nombreJugador').innerHTML = nombre   
  }
@@ -45,13 +45,18 @@ let habilidadEnemigo
    let spanHabilidadEnemigo = document.getElementById('habilidadPC')
    
    if (habilidadEnemigo == 1){
-      spanHabilidadEnemigo.innerHTML = 'Fuerza'
+    habilidadDEnemigo = 'Fuerza' 
+    spanHabilidadEnemigo.innerHTML = 'Fuerza'
    } else if (habilidadEnemigo == 2) {
-      spanHabilidadEnemigo.innerHTML = 'Velocidad'
-   }else if (habilidadEnemigo ==3) {
+    habilidadDEnemigo = 'Velocidad'  
+    spanHabilidadEnemigo.innerHTML = 'Velocidad'
+   }else  {
       spanHabilidadEnemigo.innerHTML = 'Inteligencia'
+      habilidadDEnemigo = 'inteligencia'
+       
+    
    }
-
+   crearMensaje()
  }
 
  function seleccionarSerJugador (){
@@ -93,6 +98,14 @@ let habilidadEnemigo
       document.getElementById('nombreJugadorK').innerHTML = nombre   
 
    }
+ }
+ function crearMensaje() {
+  let mensajeResultado = document.getElementById('mensajes')
+  
+  let parrafo = document.createElement('p')
+  parrafo.innerHTML = 'Escogiste ' + habilidadSer + ', Tu enemigo escogio ' + habilidadDEnemigo + ' pendiente'
+  mensajeResultado.appendChild(parrafo)
+
  }
  function aleatorio(min,max){
     return Math.floor(Math.random() * (max - min + 1) + min)
