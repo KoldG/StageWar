@@ -2,7 +2,7 @@ let nombre = ""
  nombre = prompt("Ingresa tu nombre")
 let habilidadSer
 let habilidadEnemigo
-let habilidadDEnemigo
+
 
  function iniciarJuego () {
    let botonSerJugador = document.getElementById("serElegido")
@@ -17,8 +17,7 @@ let habilidadDEnemigo
    let botonInteligencia = document.getElementById('boton-inteligencia')
    botonInteligencia.addEventListener('click', habilidadInteligencia)
   
-   
-   document.getElementById('nombreJugador').innerHTML = nombre   
+    
  }
  function habilidadFuerza () {
    
@@ -41,22 +40,22 @@ let habilidadDEnemigo
 
  function habilidadAEnemigo () {
    
-   let habilidadEnemigo = aleatorio(1,3) 
+   let habilidadAleatorio= aleatorio(1,3) 
    let spanHabilidadEnemigo = document.getElementById('habilidadPC')
    
-   if (habilidadEnemigo == 1){
-    habilidadDEnemigo = 'Fuerza' 
+   if (habilidadAleatorio == 1){
+    habilidadEnemigo = 'Fuerza' 
     spanHabilidadEnemigo.innerHTML = 'Fuerza'
-   } else if (habilidadEnemigo == 2) {
-    habilidadDEnemigo = 'Velocidad'  
+   } else if (habilidadAleatorio == 2) {
+    habilidadEnemigo = 'Velocidad'  
     spanHabilidadEnemigo.innerHTML = 'Velocidad'
-   }else  {
+   }else if (habilidadAleatorio == 3){
       spanHabilidadEnemigo.innerHTML = 'Inteligencia'
-      habilidadDEnemigo = 'inteligencia'
+      habilidadEnemigo = 'inteligencia'
        
     
    }
-   crearMensaje()
+   resultadoJuego()
  }
 
  function seleccionarSerJugador (){
@@ -99,14 +98,29 @@ let habilidadDEnemigo
 
    }
  }
- function crearMensaje() {
+
+ function crearMensaje(resultado) {
   let mensajeResultado = document.getElementById('mensajes')
   
   let parrafo = document.createElement('p')
-  parrafo.innerHTML = 'Escogiste ' + habilidadSer + ', Tu enemigo escogio ' + habilidadDEnemigo + ' pendiente'
+  parrafo.innerHTML = 'Escogiste ' + habilidadSer + ', Tu enemigo escogio ' + habilidadEnemigo + ' ' + resultado
   mensajeResultado.appendChild(parrafo)
-
+  
  }
+ function resultadoJuego() {
+  if (habilidadSer == habilidadEnemigo){
+    crearMensaje('Empate') 
+  }  else if (habilidadSer == 'Fuerza' && habilidadEnemigo == 'Velocidad'){
+    crearMensaje('Ganaste')
+  } else if (habilidadSer == 'Velocidad' && habilidadEnemigo == 'Inteligencia'){
+    crearMensaje('Ganaste')
+  } else if (habilidadSer == 'Inteligencia' && habilidadEnemigo == 'Fuerza'){
+    crearMensaje('Ganaste')
+  } else {
+    crearMensaje('Perdiste')
+  }
+}
+
  function aleatorio(min,max){
     return Math.floor(Math.random() * (max - min + 1) + min)
  }
