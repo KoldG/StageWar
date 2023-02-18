@@ -51,7 +51,7 @@ let habilidadEnemigo
     spanHabilidadEnemigo.innerHTML = 'Velocidad'
    }else if (habilidadAleatorio == 3){
       spanHabilidadEnemigo.innerHTML = 'Inteligencia'
-      habilidadEnemigo = 'inteligencia'
+      habilidadEnemigo = 'Inteligencia'
        
     
    }
@@ -110,11 +110,7 @@ let habilidadEnemigo
  function resultadoJuego() {
   if (habilidadSer == habilidadEnemigo){
     crearMensaje('Empate') 
-  }  else if (habilidadSer == 'Fuerza' && habilidadEnemigo == 'Velocidad'){
-    crearMensaje('Ganaste')
-  } else if (habilidadSer == 'Velocidad' && habilidadEnemigo == 'Inteligencia'){
-    crearMensaje('Ganaste')
-  } else if (habilidadSer == 'Inteligencia' && habilidadEnemigo == 'Fuerza'){
+  }  else if ((habilidadSer == 'Fuerza' && habilidadEnemigo == 'Velocidad') || (habilidadSer == 'Velocidad' && habilidadEnemigo == 'Inteligencia') || (habilidadSer == 'Inteligencia' && habilidadEnemigo == 'Fuerza')) {
     crearMensaje('Ganaste')
   } else {
     crearMensaje('Perdiste')
