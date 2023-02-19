@@ -2,6 +2,8 @@ let nombre = ""
  nombre = prompt("Ingresa tu nombre")
 let habilidadSer
 let habilidadEnemigo
+let vidasSerJJ = 3
+let vidasEnemigoPC = 3
 
 
  function iniciarJuego () {
@@ -107,13 +109,22 @@ let habilidadEnemigo
   mensajeResultado.appendChild(parrafo)
   
  }
+ 
+ 
  function resultadoJuego() {
+  let spanVidasSer = document.getElementById('vidasSer')
+  let spanVidasEnemigo = document.getElementById('vidasEnemigo')
+  
   if (habilidadSer == habilidadEnemigo){
     crearMensaje('Empate') 
   }  else if ((habilidadSer == 'Fuerza' && habilidadEnemigo == 'Velocidad') || (habilidadSer == 'Velocidad' && habilidadEnemigo == 'Inteligencia') || (habilidadSer == 'Inteligencia' && habilidadEnemigo == 'Fuerza')) {
     crearMensaje('Ganaste')
+    vidasEnemigoPC--
+    spanVidasEnemigo.innerHTML = vidasEnemigoPC
   } else {
     crearMensaje('Perdiste')
+    vidasSerJJ--
+    spanVidasSer.innerHTML = vidasSerJJ 
   }
 }
 
