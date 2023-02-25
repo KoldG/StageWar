@@ -7,20 +7,38 @@ let vidasEnemigoPC = 3
 
 
  function iniciarJuego () {
-   let botonSerJugador = document.getElementById("serElegido")
-   botonSerJugador.addEventListener("click",seleccionarSerJugador)
+  let sectionDestreza = document.getElementById('destreza')
+  sectionDestreza.style.display = 'none' 
+  
+  let sectionReiniciar = document.getElementById('reiniciar')
+  sectionReiniciar.style.display = 'none'
 
-   let botonFuerza = document.getElementById('boton-fuerza')
-   botonFuerza.addEventListener('click', habilidadFuerza)
-   
-   let botonVelocidad = document.getElementById('boton-velocidad')
-   botonVelocidad.addEventListener('click', habilidadVelocidad)
-   
-   let botonInteligencia = document.getElementById('boton-inteligencia')
-   botonInteligencia.addEventListener('click', habilidadInteligencia)
+  let botonSerElegido = document.getElementById('serElegido')
+  botonSerElegido.style.display = 'none'
 
-   let botonReiniciar = document.getElementById('reiniciar')
-   botonReiniciar.addEventListener('click', reiniciarJuego)
+  let inputDemonio = document.getElementById('demonio')
+  inputDemonio.addEventListener('click',botonSelerccionar)
+
+  let inputAngel = document.getElementById('angel')
+  inputAngel.addEventListener('click',botonSelerccionar)
+
+  let inputHumano = document.getElementById('humano')
+  inputHumano.addEventListener('click',botonSelerccionar)
+
+  let botonSerJugador = document.getElementById("serElegido")
+  botonSerJugador.addEventListener("click",seleccionarSerJugador)
+
+  let botonFuerza = document.getElementById('boton-fuerza')
+  botonFuerza.addEventListener('click', habilidadFuerza)
+   
+  let botonVelocidad = document.getElementById('boton-velocidad')
+  botonVelocidad.addEventListener('click', habilidadVelocidad)
+   
+  let botonInteligencia = document.getElementById('boton-inteligencia')
+  botonInteligencia.addEventListener('click', habilidadInteligencia)
+
+  let botonReiniciar = document.getElementById('reiniciar')
+  botonReiniciar.addEventListener('click', reiniciarJuego)
   
     
  }
@@ -64,16 +82,22 @@ let vidasEnemigoPC = 3
  }
 
  function seleccionarSerJugador (){
-   let inputDemonio = document.getElementById('demonio')
+  let sectionEleccion = document.getElementById('eleccion')
+  sectionEleccion.style.display = 'none'
+  
+  
+  let sectionDestreza = document.getElementById('destreza')
+  sectionDestreza.style.display = 'block' 
+  
+
+  let inputDemonio = document.getElementById('demonio')
    let inputAngel = document.getElementById('angel')
    let inputHumano = document.getElementById('humano')
    let spanSerSeleccionado = document.getElementById('serSeleccionado')
   
-
-
-   
    if (inputDemonio.checked ){
       spanSerSeleccionado.innerHTML = 'Demonio'
+      
     } else if (inputAngel.checked ){
       spanSerSeleccionado.innerHTML = 'Angel'
     } else if (inputHumano.checked ){
@@ -85,8 +109,13 @@ let vidasEnemigoPC = 3
 
     serEnemigo()
  }
+ function botonSelerccionar (){
+  let botonSerElegido = document.getElementById('serElegido')
+botonSerElegido.style.display = 'block'
+ }
  function serEnemigo () {
-   let serEnemigo = aleatorio(1,3)
+
+  let serEnemigo = aleatorio(1,3)
    let spanSerEnemigo = document.getElementById('serPc')
 
    if (serEnemigo == 1){
@@ -102,6 +131,7 @@ let vidasEnemigoPC = 3
       document.getElementById('nombreJugadorK').innerHTML = nombre   
 
    }
+   
  }
 
  function crearMensaje(resultado) {
@@ -135,9 +165,14 @@ let vidasEnemigoPC = 3
 function vidasFinal () {
   if (vidasEnemigoPC == 0){
     mensajeVidasFinal("Fue una victoria maravillosa")
+    let sectionReiniciar = document.getElementById('reiniciar')
+  sectionReiniciar.style.display = 'block'
   } else if (vidasSerJJ == 0){
     mensajeVidasFinal("La derrota es lo peor que se puede saborear")
+    let sectionReiniciar = document.getElementById('reiniciar')
+  sectionReiniciar.style.display = 'block'
   }
+  
 }
 
 function mensajeVidasFinal (terminado){
