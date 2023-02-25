@@ -18,6 +18,9 @@ let vidasEnemigoPC = 3
    
    let botonInteligencia = document.getElementById('boton-inteligencia')
    botonInteligencia.addEventListener('click', habilidadInteligencia)
+
+   let botonReiniciar = document.getElementById('reiniciar')
+   botonReiniciar.addEventListener('click', reiniciarJuego)
   
     
  }
@@ -143,6 +146,20 @@ function mensajeVidasFinal (terminado){
   let fin = document.createElement('p')
   fin.innerHTML = terminado
   mensajeResultado.appendChild(fin)
+
+  let botonFuerza = document.getElementById('boton-fuerza')
+   botonFuerza.disabled = true 
+   
+   let botonVelocidad = document.getElementById('boton-velocidad')
+   botonVelocidad.disabled = true
+   
+   let botonInteligencia = document.getElementById('boton-inteligencia')
+   botonInteligencia.disabled = true
+}
+
+function reiniciarJuego (){
+  location.reload()
+
 }
 
  function aleatorio(min,max){
