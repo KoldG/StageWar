@@ -126,6 +126,23 @@ let vidasEnemigoPC = 3
     vidasSerJJ--
     spanVidasSer.innerHTML = vidasSerJJ 
   }
+
+  vidasFinal()
+}
+function vidasFinal () {
+  if (vidasEnemigoPC == 0){
+    mensajeVidasFinal("Fue una victoria maravillosa")
+  } else if (vidasSerJJ == 0){
+    mensajeVidasFinal("La derrota es lo peor que se puede saborear")
+  }
+}
+
+function mensajeVidasFinal (terminado){
+  let mensajeResultado = document.getElementById('mensajes')
+  
+  let fin = document.createElement('p')
+  fin.innerHTML = terminado
+  mensajeResultado.appendChild(fin)
 }
 
  function aleatorio(min,max){
