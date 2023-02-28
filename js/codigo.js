@@ -1,5 +1,5 @@
 let nombre = ""
- nombre = prompt("Ingresa tu nombre")
+// nombre = prompt("Ingresa tu nombre")
 let habilidadSer
 let habilidadEnemigo
 let vidasSerJJ = 3
