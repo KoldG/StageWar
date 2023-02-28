@@ -9,62 +9,57 @@
     <script src="js/codigo.js"></script>
 </head>
 <body>
-    <section id="titulo">
-        <h1>StageWar⚔️🔥</h1>
-    </section>
-    <section id="parrafo">
-        <p1><span id="nombreJugador"></span></p1> te contaremos una historia....
-        <p>Cuando lucifer descendio de los cielos de dios, un ejercito de angeles descendieron con el.</p>
-        <p>Desde entonces en el plano terrenal conviven humanos, angeles y demonios.</p>
-        <p>A travez del tiempo los humanos al ser la raza inferior en el plano terrenal se vio obligada a evolucionar.</p>
-        <p>Los porticos son los humanos cuyas capacidades, inteligencia y destreza han podido rivalizar con los angeles y demonios.</p>
-    </section>
-    <section id="escoge">
-    <div >
-        <h2>Escoge quien quieres ser:</h2>
-        <p>
-            <input type="radio" name="ser" id="demonio"/>
-            <label for="demonio">Demonio👹</label>
+    <section id="lonchera">
+        <section class="titulo">
+            <h1>StageWar⚔️🔥</h1>
+        </section>
+        <section id="parrafo">
+            <p1><span id="nombreJugador"></span></p1> te contaremos una historia....
+            <p>Cuando lucifer descendio de los cielos de dios, un ejercito de angeles descendieron con el.</p>
+            <p>Desde entonces en el plano terrenal conviven humanos, angeles y demonios.</p>
+            <p>A travez del tiempo los humanos al ser la raza inferior en el plano terrenal se vio obligada a evolucionar.</p>
+            <p>Los porticos son los humanos cuyas capacidades, inteligencia y destreza han podido rivalizar con los angeles y demonios.</p>
+        </section>
+        <section id="escoge">
+            <h2>Escoge quien quieres ser:</h2>
+            <p>
+                <input type="radio" name="ser" id="demonio"/>
+                <label for="demonio">Demonio👹</label>
+                
+                <input type="radio" name="ser" id="angel"/>
+                <label for="angel">Angel🌟</label>
             
-            <input type="radio" name="ser" id="angel"/>
-            <label for="angel">Angel🌟</label>
-        
+                
+                <input type="radio" name="ser" id="humano"/>
+                <label for="humano">Humano💪😁</label>
+            </p>
+        <button id="serElegido">Seleccionar</button>
+                
             
-            <input type="radio" name="ser" id="humano"/>
-            <label for="humano">Humano💪😁</label>
-        </p>
-    </div>
-        
+        </section>
+        <section id="destreza">
+            <h3><span id="nombreJugadorK"></span> eres un <span id="serSeleccionado"></span> Tienes <span id="vidasSer">3</span> vidas</h3>
+            <h3>Tu enemigo es un <span id="serPc"></span> y tiene <span id="vidasEnemigo">3</span> vidas</h3>
+
+            <h2> Escoge tu destreza:</h2>
+            <p>
+                <button id="boton-fuerza">Fuerza💪</button>
+                <button id="boton-velocidad">Velocidad🏃‍♂️</button>
+                <button id="boton-inteligencia">Inteligencia🧠</button>
+            </p>
+            <p> Usaste habilidad de <span id="habilidadJJ"></span></p>
+            <p>tu enemigo tiene la habilidad de <span id="habilidadPC"></span></p>
+        </section>
+        <section id="mensajes">
+
+        </section>
             
 
-    <button id="serElegido">Seleccionar</button>
-            
-        
-    </section>
-       
-    <section id="destreza">
-        <h3><span id="nombreJugadorK"></span> eres un <span id="serSeleccionado"></span> Tienes <span id="vidasSer">3</span> vidas</h3>
-        <h3>Tu enemigo es un <span id="serPc"></span> y tiene <span id="vidasEnemigo">3</span> vidas</h3>
+        <section id="reiniciar">
 
-        <h2> Escoge tu destreza:</h2>
-        <p>
-            <button id="boton-fuerza">Fuerza💪</button>
-            <button id="boton-velocidad">Velocidad🏃‍♂️</button>
-            <button id="boton-inteligencia">Inteligencia🧠</button>
-        </p>
-        <p> Usaste habilidad de <span id="habilidadJJ"></span></p>
-        <p>tu enemigo tiene la habilidad de <span id="habilidadPC"></span></p>
-    </section>
-    <section id="mensajes">
+                <button>Reiniciar</button>
         
+        </section>
     </section>
-        
-
-    <section id="reiniciar">
-
-            <button>Reiniciar</button>
-       
-    </section>
-    
 </body>
 </html>
