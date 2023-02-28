@@ -1,11 +1,24 @@
 
-.titulo{
+body {
+    background-color: wheat;
+}
+#titulo{
     color: goldenrod;
     width: 224px;
     height: 48px;
-    background-color: brown;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 }
+
 #parrafo{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+#escoge{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

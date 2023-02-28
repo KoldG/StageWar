@@ -40,7 +40,60 @@ let vidasEnemigoPC = 3
   let botonReiniciar = document.getElementById('reiniciar')
   botonReiniciar.addEventListener('click', reiniciarJuego)
   
+function seleccionarSerJugador (){
+    let sectionParrafo = document.getElementById('parrafo')
+    sectionParrafo.style.display = 'none'
+  
+    let sectionEleccion = document.getElementById('escoge')
+    sectionEleccion.style.display = 'none'
     
+    
+    let sectionDestreza = document.getElementById('destreza')
+    sectionDestreza.style.display = 'block' 
+    
+  
+    let inputDemonio = document.getElementById('demonio')
+    let inputAngel = document.getElementById('angel')
+    let inputHumano = document.getElementById('humano')
+    let spanSerSeleccionado = document.getElementById('serSeleccionado')
+    
+    if (inputDemonio.checked ){
+      spanSerSeleccionado.innerHTML = 'Demonio'
+        
+    } else if (inputAngel.checked ){
+      spanSerSeleccionado.innerHTML = 'Angel'
+    } else if (inputHumano.checked ){
+      spanSerSeleccionado.innerHTML = 'Humano'
+    } else {
+      alert ('Selecciona cualquiera de los seres vivos')
+    }
+  
+  
+      serEnemigo()
+   }
+  function botonSelerccionar (){
+    let botonSerElegido = document.getElementById('serElegido')
+    botonSerElegido.style.display = 'block'
+   }
+ function serEnemigo () {
+    let serEnemigo = aleatorio(1,3)
+    let spanSerEnemigo = document.getElementById('serPc')
+  
+    if (serEnemigo == 1){
+      spanSerEnemigo.innerHTML = 'Demonio'
+      document.getElementById('nombreJugadorK').innerHTML = nombre   
+  
+    } else if (serEnemigo == 2){
+       spanSerEnemigo.innerHTML = 'Angel'
+      document.getElementById('nombreJugadorK').innerHTML = nombre   
+  
+    } else if (serEnemigo == 3){
+      spanSerEnemigo.innerHTML = 'Humano'
+      document.getElementById('nombreJugadorK').innerHTML = nombre   
+  
+    }
+     
+   }   
  }
  function habilidadFuerza () {
    
@@ -73,65 +126,12 @@ let vidasEnemigoPC = 3
     habilidadEnemigo = 'Velocidad'  
     spanHabilidadEnemigo.innerHTML = 'Velocidad'
    }else if (habilidadAleatorio == 3){
-      spanHabilidadEnemigo.innerHTML = 'Inteligencia'
-      habilidadEnemigo = 'Inteligencia'
+    spanHabilidadEnemigo.innerHTML = 'Inteligencia'
+    habilidadEnemigo = 'Inteligencia'
        
     
    }
    resultadoJuego()
- }
-
- function seleccionarSerJugador (){
-  let sectionEleccion = document.getElementById('eleccion')
-  sectionEleccion.style.display = 'none'
-  
-  
-  let sectionDestreza = document.getElementById('destreza')
-  sectionDestreza.style.display = 'block' 
-  
-
-  let inputDemonio = document.getElementById('demonio')
-   let inputAngel = document.getElementById('angel')
-   let inputHumano = document.getElementById('humano')
-   let spanSerSeleccionado = document.getElementById('serSeleccionado')
-  
-   if (inputDemonio.checked ){
-      spanSerSeleccionado.innerHTML = 'Demonio'
-      
-    } else if (inputAngel.checked ){
-      spanSerSeleccionado.innerHTML = 'Angel'
-    } else if (inputHumano.checked ){
-      spanSerSeleccionado.innerHTML = 'Humano'
-    } else {
-      alert ('Selecciona cualquiera de los seres vivos')
-    }
-
-
-    serEnemigo()
- }
- function botonSelerccionar (){
-  let botonSerElegido = document.getElementById('serElegido')
-botonSerElegido.style.display = 'block'
- }
- function serEnemigo () {
-
-  let serEnemigo = aleatorio(1,3)
-   let spanSerEnemigo = document.getElementById('serPc')
-
-   if (serEnemigo == 1){
-      spanSerEnemigo.innerHTML = 'Demonio'
-      document.getElementById('nombreJugadorK').innerHTML = nombre   
-
-   } else if (serEnemigo == 2){
-      spanSerEnemigo.innerHTML = 'Angel'
-      document.getElementById('nombreJugadorK').innerHTML = nombre   
-
-   } else if (serEnemigo == 3){
-      spanSerEnemigo.innerHTML = 'Humano'
-      document.getElementById('nombreJugadorK').innerHTML = nombre   
-
-   }
-   
  }
 
  function crearMensaje(resultado) {
@@ -183,13 +183,13 @@ function mensajeVidasFinal (terminado){
   mensajeResultado.appendChild(fin)
 
   let botonFuerza = document.getElementById('boton-fuerza')
-   botonFuerza.disabled = true 
+  botonFuerza.disabled = true 
    
-   let botonVelocidad = document.getElementById('boton-velocidad')
-   botonVelocidad.disabled = true
+  let botonVelocidad = document.getElementById('boton-velocidad')
+  botonVelocidad.disabled = true
    
-   let botonInteligencia = document.getElementById('boton-inteligencia')
-   botonInteligencia.disabled = true
+  let botonInteligencia = document.getElementById('boton-inteligencia')
+  botonInteligencia.disabled = true
 }
 
 function reiniciarJuego (){
