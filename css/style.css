@@ -32,3 +32,15 @@
     background: linear-gradient(123deg, black, transparent);
     height: 100vh;
 }
+#maniobra {
+    display: flex;
+    width: 416px;
+    justify-content: flex-start;
+
+}
+#destreza{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
