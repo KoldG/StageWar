@@ -44,3 +44,25 @@
     align-items: center;
     justify-content: center;
 }
+#barras{
+    display: flex;
+    justify-content: space-between;
+    width: 780px;
+    align-items: center;
+    margin: 0px 0px 0px 100px;
+}
+#juego{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#mensajes{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#reiniciar{
+    display: flex
+}
