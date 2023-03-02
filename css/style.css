@@ -1,15 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Aleo&family=Creepster&family=Marck+Script&family=Rubik+Distressed&family=Rubik+Microbe&family=Satisfy&family=Tilt+Prism&display=swap');
+body{
+    font-family: 'Tilt Prism', cursive;
+    background: linear-gradient(123deg, wheat , thistle);
+    height: 100vh;
+}
 .titulo {
     width: 219px;
-    color: goldenrod;
+    color: darkgray;
     border: solid;
-    margin: 10px;
+    margin: 10px 0px 68px;
     border-radius: 28px 0px 50px 16px;
-    background: black;
+    background: linear-gradient(1deg, thistle, pink);
     padding: 5px;
     height: 36px;
     display: flex;
     justify-content: center;
     align-items: center;
+    border-color: black;
 }
 
 #parrafo{
@@ -17,6 +24,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-family: 'Rubik Distressed', cursive;
+    font-family: 'Satisfy', cursive;
 }
 #escoge{
     display: flex;
@@ -24,18 +33,18 @@
     align-items: center;
     justify-content: center;
     border-style: groove;
-    border-color: yellowgreen;
-    background: linear-gradient(123deg, black, transparent);
-    background-color: bisque;
+    border-color: lightslategrey;
+    background-color: unset;
+    margin: 0px 460px;
+    border-radius: 66px;
 }
-#lonchera{
-    background: linear-gradient(123deg, black, transparent);
-    height: 100vh;
-}
+
 #maniobra {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    width: 540px;
+    height: 110px;
 }
 #destreza{
     display: flex;
@@ -63,14 +72,62 @@
 #reiniciar{
     display: flex
 }
-.tarjetasSer{
-    width: 100px;
+.tarjetasSerDemonio{
+    width: 132px;
     height: 100px;
-    background: blue;
+    background: darkred;
     padding: 10px;
     box-sizing: border-box;
     margin: 5px;
-    border: 2px solid chocolate;
+    border: 2px solid red;
+    border-radius: 16px;
+    font-family: 'Creepster', cursive;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.tarjetasSerDemonio img {
+    width: 70px;
+    height: 60px;
+}
+.tarjetasSerAngel{
+    width: 132px;
+    height: 100px;
+    background: wheat;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 5px;
+    border: 2px solid aquamarine;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Marck Script', cursive;
+}
+.tarjetasSerAngel img {
+    width: 70px;
+    height: 60px;
+}
+.tarjetasSerHumano{
+    width: 132px;
+    height: 100px;
+    background: thistle;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 5px;
+    border: 2px solid coral;
+    border-radius: 16px;
+    font-family: 'Aleo', serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.tarjetasSerHumano img {
+    width: 70px;
+    height: 60px;
 }
 input{
     display: none;
