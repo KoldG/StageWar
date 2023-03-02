@@ -46,10 +46,8 @@
 }
 #barras{
     display: flex;
-    justify-content: space-between;
-    width: 780px;
+    justify-content: space-evenly;
     align-items: center;
-    margin: 0px 0px 0px 100px;
 }
 #juego{
     display: flex;
