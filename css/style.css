@@ -34,9 +34,8 @@
 }
 #maniobra {
     display: flex;
-    width: 416px;
     justify-content: flex-start;
-
+    align-items: center;
 }
 #destreza{
     display: flex;
@@ -63,4 +62,23 @@
 }
 #reiniciar{
     display: flex
+}
+.tarjetasSer{
+    width: 100px;
+    height: 100px;
+    background: blue;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 5px;
+    border: 2px solid chocolate;
+}
+input{
+    display: none;
+}
+#serElegido{
+    border: 2px solid;
+    margin: 5px;
+    width: 100px;
+    height: 30px;
+    
 }
