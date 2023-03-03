@@ -136,10 +136,13 @@ function seleccionarSerJugador (){
 
  function crearMensaje(resultado) {
   let mensajeResultado = document.getElementById('mensajes')
-  
-  let parrafo = document.createElement('p')
-  parrafo.innerHTML = 'Escogiste ' + habilidadSer + ', Tu enemigo escogio ' + habilidadEnemigo + ' ' + resultado
-  mensajeResultado.appendChild(parrafo)
+  let mensajeResultadoA = document.getElementById('resultadoA')
+
+  mensajeResultadoA.innerHTML = resultado
+
+  // let parrafo = document.createElement('p')
+  // parrafo.innerHTML = 'Escogiste ' + habilidadSer + ', Tu enemigo escogio ' + habilidadEnemigo + ' ' + resultado
+  // mensajeResultado.appendChild(parrafo)
   
  }
  
@@ -166,17 +169,17 @@ function vidasFinal () {
   if (vidasEnemigoPC == 0){
     mensajeVidasFinal("Fue una victoria maravillosa")
     let sectionReiniciar = document.getElementById('reiniciar')
-  sectionReiniciar.style.display = 'block'
+  sectionReiniciar.style.display = 'flex'
   } else if (vidasSerJJ == 0){
     mensajeVidasFinal("La derrota es lo peor que se puede saborear")
     let sectionReiniciar = document.getElementById('reiniciar')
-  sectionReiniciar.style.display = 'block'
+  sectionReiniciar.style.display = 'flex'
   }
   
 }
 
 function mensajeVidasFinal (terminado){
-  let mensajeResultado = document.getElementById('mensajes')
+  let mensajeResultado = document.getElementById('pili')
   
   let fin = document.createElement('p')
   fin.innerHTML = terminado
