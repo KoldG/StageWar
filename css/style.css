@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Aleo&family=Creepster&family=Marck+Script&family=Rubik+Distressed&family=Rubik+Microbe&family=Satisfy&family=Tilt+Prism&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Aleo&family=Creepster&family=Marck+Script&family=Outfit:wght@300&family=Rubik+Distressed&family=Rubik+Microbe&family=Satisfy&family=Tilt+Prism&display=swap');
 body{
     font-family: 'Tilt Prism', cursive;
     background: linear-gradient(123deg, wheat , thistle);
@@ -56,6 +56,7 @@ body{
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    font-family: 'Outfit', sans-serif;
 }
 #juego{
     display: flex;
@@ -68,6 +69,7 @@ body{
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    font-family: 'Outfit', sans-serif;
 }
 #reiniciar{
     display: flex
@@ -137,5 +139,29 @@ input{
     margin: 5px;
     width: 100px;
     height: 30px;
-    
+    background: linear-gradient(45deg, pink, white,transparent);
+    border-radius: 20px;
+    border-color: aliceblue;
+    font-family: 'Outfit', sans-serif;
+}
+.tarjetasPeleaA{
+    margin: 5px;
+    border-radius: 16px;
+    background: grey;
+}
+.tarjetasPeleaB{
+    margin: 5px;
+    border-radius: 16px;
+    background: cornflowerblue
+}
+.tarjetasPeleaC{
+    margin: 5px;
+    border-radius: 16px;
+    background: lavender
+}
+.mensajeBatalla{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    font-family: 'Outfit', sans-serif;
 }
