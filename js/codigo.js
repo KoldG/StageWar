@@ -39,6 +39,13 @@ let vidasEnemigoPC = 3
 
   let botonReiniciar = document.getElementById('reiniciar')
   botonReiniciar.addEventListener('click', reiniciarJuego)
+
+// seleccionarSerJugador
+  let sectionParrafo = document.getElementById('parrafo')
+  let sectionEleccion = document.getElementById('escoge')
+  let spanSerSeleccionado = document.getElementById('serSeleccionado')
+
+//
   
 function seleccionarSerJugador (){
     let sectionParrafo = document.getElementById('parrafo')
