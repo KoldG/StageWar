@@ -1,99 +1,76 @@
 let nombre = ""
-// nombre = prompt("Ingresa tu nombre")
+nombre = prompt("Ingresa tu nombre")
 let habilidadSer
 let habilidadEnemigo
 let vidasSerJJ = 3
 let vidasEnemigoPC = 3
 
+let sectionDestreza = document.getElementById('destreza')
+let sectionReiniciar = document.getElementById('reiniciar')
+let botonSerElegido = document.getElementById('serElegido')
+let inputDemonio = document.getElementById('demonio')
+let inputAngel = document.getElementById('angel')
+let inputHumano = document.getElementById('humano')
+let botonSerJugador = document.getElementById("serElegido")
+let botonFuerza = document.getElementById('boton-fuerza')
+let botonVelocidad = document.getElementById('boton-velocidad')
+let botonInteligencia = document.getElementById('boton-inteligencia')
+let botonReiniciar = document.getElementById('reiniciar')
 
- function iniciarJuego () {
-  let sectionDestreza = document.getElementById('destreza')
+
+let sectionParrafo = document.getElementById('parrafo')
+let sectionEleccion = document.getElementById('escoge')
+let spanSerSeleccionadoA = document.getElementById('serSeleccionadoA')
+  
+let mensajeResultado = document.getElementById('pili')
+
+function iniciarJuego () {
   sectionDestreza.style.display = 'none' 
   
-  let sectionReiniciar = document.getElementById('reiniciar')
   sectionReiniciar.style.display = 'none'
 
-  let botonSerElegido = document.getElementById('serElegido')
   botonSerElegido.style.display = 'none'
 
-  let inputDemonio = document.getElementById('demonio')
-  inputDemonio.addEventListener('click',botonSelerccionar)
+  inputDemonio.addEventListener('click',botonSeleccionar)
 
-  let inputAngel = document.getElementById('angel')
-  inputAngel.addEventListener('click',botonSelerccionar)
+  inputAngel.addEventListener('click',botonSeleccionar)
 
-  let inputHumano = document.getElementById('humano')
-  inputHumano.addEventListener('click',botonSelerccionar)
+  inputHumano.addEventListener('click',botonSeleccionar)
 
-  let botonSerJugador = document.getElementById("serElegido")
   botonSerJugador.addEventListener("click",seleccionarSerJugador)
 
-  let botonFuerza = document.getElementById('boton-fuerza')
   botonFuerza.addEventListener('click', habilidadFuerza)
-   
-  let botonVelocidad = document.getElementById('boton-velocidad')
+
   botonVelocidad.addEventListener('click', habilidadVelocidad)
-   
-  let botonInteligencia = document.getElementById('boton-inteligencia')
+
   botonInteligencia.addEventListener('click', habilidadInteligencia)
 
-  let botonReiniciar = document.getElementById('reiniciar')
   botonReiniciar.addEventListener('click', reiniciarJuego)
-
-// seleccionarSerJugador
-  let sectionParrafo = document.getElementById('parrafo')
-  let sectionEleccion = document.getElementById('escoge')
-  let spanSerSeleccionado = document.getElementById('serSeleccionado')
-
-//botonSeleccionar
--1
-//serEnemigo 
-0
-//habilidadFuerza
-0
-//habilidadVelocidad
-0
-//habilidadInteligencia
-0
-//habilidadEnemigo
-0
-//crearMensaje
-0
-//resultadoJuego
-0
-//vidasFinal
-0
-//
+  
+}
+  
 function seleccionarSerJugador (){
     sectionParrafo.style.display = 'none'
   
-
     sectionEleccion.style.display = 'none'
     
-
     sectionDestreza.style.display = 'block' 
     
-    let inputDemonio = document.getElementById('demonio')
-    let inputAngel = document.getElementById('angel')
-    let inputHumano = document.getElementById('humano')
-    
     if (inputDemonio.checked ){
-      spanSerSeleccionado.innerHTML = 'Demonio'
-        
+      spanSerSeleccionadoA.innerHTML = 'Demonio'
     } else if (inputAngel.checked ){
-      spanSerSeleccionado.innerHTML = 'Angel'
+      spanSerSeleccionadoA.innerHTML = 'Angel'
     } else if (inputHumano.checked ){
-      spanSerSeleccionado.innerHTML = 'Humano'
+      spanSerSeleccionadoA.innerHTML = 'Humano'
     } else {
       alert ('Selecciona cualquiera de los seres vivos')
-    }
-  
-  
+    } 
+    
       serEnemigo()
    }
-  function botonSelerccionar (){
-  
+  function botonSeleccionar (){
     botonSerElegido.style.display = 'block'
+   
    }
  function serEnemigo () {
     let serEnemigo = aleatorio(1,3)
@@ -112,10 +89,10 @@ function seleccionarSerJugador (){
       document.getElementById('nombreJugadorK').innerHTML = nombre   
   
     }
+    }
      
-   }   
- }
- function habilidadFuerza () { 
+ 
+ function habilidadFuerza () {
    habilidadSer = 'Fuerza'
    document.getElementById('habilidadJJ').innerHTML = 'Fuerza'
    habilidadAEnemigo ()
@@ -130,11 +107,9 @@ function seleccionarSerJugador (){
    habilidadSer = 'Inteligencia'
    document.getElementById('habilidadJJ').innerHTML = 'Inteligencia'
    habilidadAEnemigo ()
-
  }
 
  function habilidadAEnemigo () {
-   
    let habilidadAleatorio= aleatorio(1,3) 
    let spanHabilidadEnemigo = document.getElementById('habilidadPC')
    
@@ -152,12 +127,17 @@ function seleccionarSerJugador (){
  }
 
  function crearMensaje(resultado) {
+  let mensajeResultado = document.getElementById('mensajes')
   let mensajeResultadoA = document.getElementById('resultadoA')
+
   mensajeResultadoA.innerHTML = resultado
+
+  // let parrafo = document.createElement('p')
+  // parrafo.innerHTML = 'Escogiste ' + habilidadSer + ', Tu enemigo escogio ' + habilidadEnemigo + ' ' + resultado
+  // mensajeResultado.appendChild(parrafo)
   
  }
- 
- 
+
  function resultadoJuego() {
   let spanVidasSer = document.getElementById('vidasSer')
   let spanVidasEnemigo = document.getElementById('vidasEnemigo')
@@ -173,7 +153,6 @@ function seleccionarSerJugador (){
     vidasSerJJ--
     spanVidasSer.innerHTML = vidasSerJJ 
   }
-
   vidasFinal()
 }
 function vidasFinal () {
@@ -186,23 +165,17 @@ function vidasFinal () {
     let sectionReiniciar = document.getElementById('reiniciar')
   sectionReiniciar.style.display = 'flex'
   }
-  
 }
 
 function mensajeVidasFinal (terminado){
-  let mensajeResultado = document.getElementById('pili')
-  
   let fin = document.createElement('p')
   fin.innerHTML = terminado
   mensajeResultado.appendChild(fin)
 
-  botonFuerza = document.getElementById('boton-fuerza')
   botonFuerza.disabled = true 
    
-  let botonVelocidad = document.getElementById('boton-velocidad')
   botonVelocidad.disabled = true
    
-  let botonInteligencia = document.getElementById('boton-inteligencia')
   botonInteligencia.disabled = true
 }
 
@@ -213,4 +186,5 @@ function reiniciarJuego (){
  function aleatorio(min,max){
     return Math.floor(Math.random() * (max - min + 1) + min)
  }
+ 
  window.addEventListener('load', iniciarJuego)
