@@ -45,24 +45,37 @@ let vidasEnemigoPC = 3
   let sectionEleccion = document.getElementById('escoge')
   let spanSerSeleccionado = document.getElementById('serSeleccionado')
 
+//botonSeleccionar
+-1
+//serEnemigo 
+0
+//habilidadFuerza
+0
+//habilidadVelocidad
+0
+//habilidadInteligencia
+0
+//habilidadEnemigo
+0
+//crearMensaje
+0
+//resultadoJuego
+0
+//vidasFinal
+0
 //
-  
 function seleccionarSerJugador (){
-    let sectionParrafo = document.getElementById('parrafo')
     sectionParrafo.style.display = 'none'
   
-    let sectionEleccion = document.getElementById('escoge')
+
     sectionEleccion.style.display = 'none'
     
-    
-    let sectionDestreza = document.getElementById('destreza')
+
     sectionDestreza.style.display = 'block' 
     
-  
     let inputDemonio = document.getElementById('demonio')
     let inputAngel = document.getElementById('angel')
     let inputHumano = document.getElementById('humano')
-    let spanSerSeleccionado = document.getElementById('serSeleccionado')
     
     if (inputDemonio.checked ){
       spanSerSeleccionado.innerHTML = 'Demonio'
@@ -79,7 +92,7 @@ function seleccionarSerJugador (){
       serEnemigo()
    }
   function botonSelerccionar (){
-    let botonSerElegido = document.getElementById('serElegido')
+  
     botonSerElegido.style.display = 'block'
    }
  function serEnemigo () {
@@ -102,8 +115,7 @@ function seleccionarSerJugador (){
      
    }   
  }
- function habilidadFuerza () {
-   
+ function habilidadFuerza () { 
    habilidadSer = 'Fuerza'
    document.getElementById('habilidadJJ').innerHTML = 'Fuerza'
    habilidadAEnemigo ()
@@ -135,21 +147,13 @@ function seleccionarSerJugador (){
    }else if (habilidadAleatorio == 3){
     spanHabilidadEnemigo.innerHTML = 'Inteligencia'
     habilidadEnemigo = 'Inteligencia'
-       
-    
    }
    resultadoJuego()
  }
 
  function crearMensaje(resultado) {
-  let mensajeResultado = document.getElementById('mensajes')
   let mensajeResultadoA = document.getElementById('resultadoA')
-
   mensajeResultadoA.innerHTML = resultado
-
-  // let parrafo = document.createElement('p')
-  // parrafo.innerHTML = 'Escogiste ' + habilidadSer + ', Tu enemigo escogio ' + habilidadEnemigo + ' ' + resultado
-  // mensajeResultado.appendChild(parrafo)
   
  }
  
@@ -192,7 +196,7 @@ function mensajeVidasFinal (terminado){
   fin.innerHTML = terminado
   mensajeResultado.appendChild(fin)
 
-  let botonFuerza = document.getElementById('boton-fuerza')
+  botonFuerza = document.getElementById('boton-fuerza')
   botonFuerza.disabled = true 
    
   let botonVelocidad = document.getElementById('boton-velocidad')
@@ -204,17 +208,9 @@ function mensajeVidasFinal (terminado){
 
 function reiniciarJuego (){
   location.reload()
-
 }
 
  function aleatorio(min,max){
     return Math.floor(Math.random() * (max - min + 1) + min)
  }
- 
-
-
-
- 
-
-
  window.addEventListener('load', iniciarJuego)
