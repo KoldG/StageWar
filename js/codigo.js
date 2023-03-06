@@ -5,6 +5,8 @@ let habilidadEnemigo
 let vidasSerJJ = 3
 let vidasEnemigoPC = 3
 
+let seres = []
+
 const sectionDestreza = document.getElementById('destreza')
 const sectionReiniciar = document.getElementById('reiniciar')
 const botonSerElegido = document.getElementById('serElegido')
@@ -22,6 +24,49 @@ const sectionEleccion = document.getElementById('escoge')
 const spanSerSeleccionadoA = document.getElementById('serSeleccionadoA')
   
 const mensajeResultado = document.getElementById('pili')
+
+class Ser {
+  constructor(nombre1, foto,vida){
+    this.nombre1 = nombre1
+    this.foto = foto
+    this.vida = vida
+    this.habilidad = []
+  }
+}
+
+
+let demonio = new Ser('Demonio', 'assets/demonio.avif', 5)
+
+let angel = new Ser('Angel', 'assets/angel.jpg', 5)
+
+let humano = new Ser('Humano', 'assets/humano.jpg', 5)
+
+seres.push(demonio,angel,humano)
+
+demonio.habilidad.push (
+  {nombre: '💪', id: 'boton-fuerza'},
+  {nombre: '💪', id: 'boton-fuerza'},
+  {nombre: '💪', id: 'boton-fuerza'}, 
+  {nombre: '🏃‍♂️', id: 'boton-velocidad'},
+  {nombre: '🧠', id: 'boton-inteligencia'}, 
+)
+
+angel.habilidad.push (
+  {nombre: '🏃‍♂️', id: 'boton-velocidad'},
+  {nombre: '🏃‍♂️', id: 'boton-velocidad'},
+  {nombre: '🏃‍♂️', id: 'boton-velocidad'},
+  {nombre: '💪', id: 'boton-fuerza'}, 
+  {nombre: '🧠', id: 'boton-inteligencia'}, 
+)
+
+humano.habilidad.push (
+  {nombre: '🧠', id: 'boton-inteligencia'},
+  {nombre: '🧠', id: 'boton-inteligencia'},
+  {nombre: '🧠', id: 'boton-inteligencia'},
+  {nombre: '💪', id: 'boton-fuerza'}, 
+  {nombre: '🏃‍♂️', id: 'boton-velocidad'},
+)
+
 
 function iniciarJuego () {
   sectionDestreza.style.display = 'none' 
