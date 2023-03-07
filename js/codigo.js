@@ -1,12 +1,15 @@
-let nombre = ""
+// let nombre = ""
 //nombre = prompt("Ingresa tu nombre")
 let habilidadSer
 let habilidadEnemigo
+let opcionDeSeres
+
 let vidasSerJJ = 3
 let vidasEnemigoPC = 3
 
 let seres = []
 
+const contenedorSeres = document.getElementById('contenedorSeres')
 const sectionDestreza = document.getElementById('destreza')
 const sectionReiniciar = document.getElementById('reiniciar')
 const botonSerElegido = document.getElementById('serElegido')
@@ -41,8 +44,6 @@ let angel = new Ser('Angel', 'assets/angel.jpg', 5)
 
 let humano = new Ser('Humano', 'assets/humano.jpg', 5)
 
-seres.push(demonio,angel,humano)
-
 demonio.habilidad.push (
   {nombre: '💪', id: 'boton-fuerza'},
   {nombre: '💪', id: 'boton-fuerza'},
@@ -67,9 +68,21 @@ humano.habilidad.push (
   {nombre: '🏃‍♂️', id: 'boton-velocidad'},
 )
 
+seres.push(demonio,angel,humano)
 
 function iniciarJuego () {
   sectionDestreza.style.display = 'none' 
+  seres.forEach((serx) => {
+    opcionDeSeres = `
+    <input type="radio" name="ser" id=${serx.nombre1}/>
+    <label class="tarjetasSerDemonio" for=${serx.nombre1}>
+    <p2>${serx.nombre1}</p2>
+    <img src=${serx.foto} alt=${serx.nombre1}>
+    </label>
+    `
+    contenedorSeres.innerHTML += opcionDeSeres
+
+  })
   sectionReiniciar.style.display = 'none'
   botonSerElegido.style.display = 'none'
   inputDemonio.addEventListener('click',botonSeleccionar)

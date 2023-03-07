@@ -38,7 +38,7 @@ body{
     border-radius: 66px;
 }
 
-#maniobra {
+.maniobra {
     display: flex;
     justify-content: flex-start;
     align-items: center;
