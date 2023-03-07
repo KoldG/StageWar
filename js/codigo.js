@@ -1,11 +1,15 @@
-// let nombre = ""
-//nombre = prompt("Ingresa tu nombre")
+ let nombre = ""
+// nombre = prompt("Ingresa tu nombre")
 let habilidadSer
 let habilidadEnemigo
 let opcionDeSeres
-
+let serjugador123
 let vidasSerJJ = 3
 let vidasEnemigoPC = 3
+let ataquesHabilidad
+let botonFuerza 
+let botonVelocidad 
+let botonInteligencia 
 
 let seres = []
 
@@ -13,59 +17,58 @@ const contenedorSeres = document.getElementById('contenedorSeres')
 const sectionDestreza = document.getElementById('destreza')
 const sectionReiniciar = document.getElementById('reiniciar')
 const botonSerElegido = document.getElementById('serElegido')
-const inputDemonio = document.getElementById('demonio')
-const inputAngel = document.getElementById('angel')
-const inputHumano = document.getElementById('humano')
+const spanSerEnemigo = document.getElementById('serPc')
 const botonSerJugador = document.getElementById("serElegido")
-const botonFuerza = document.getElementById('boton-fuerza')
-const botonVelocidad = document.getElementById('boton-velocidad')
-const botonInteligencia = document.getElementById('boton-inteligencia')
 const botonReiniciar = document.getElementById('reiniciar')
-
 const sectionParrafo = document.getElementById('parrafo')
 const sectionEleccion = document.getElementById('escoge')
 const spanSerSeleccionadoA = document.getElementById('serSeleccionadoA')
-  
 const mensajeResultado = document.getElementById('pili')
+const contenedorPelea = document.getElementById('pelea')
 
+let inputDemonio 
+let inputAngel 
+let inputHumano 
 class Ser {
-  constructor(nombre1, foto,vida){
+  constructor(nombre1, foto, vida, tarjeta){
     this.nombre1 = nombre1
     this.foto = foto
     this.vida = vida
     this.habilidad = []
+    this.tarjeta = tarjeta
+
   }
 }
 
 
-let demonio = new Ser('Demonio', 'assets/demonio.avif', 5)
+let demonio = new Ser('Demonio', 'assets/demonio.avif', 5, "tarjetasSerDemonio")
 
-let angel = new Ser('Angel', 'assets/angel.jpg', 5)
+let angel = new Ser('Angel', 'assets/angel.jpg', 5, 'tarjetasSerAngel')
 
-let humano = new Ser('Humano', 'assets/humano.jpg', 5)
+let humano = new Ser('Humano', 'assets/humano.jpg', 5, 'tarjetasSerHumano')
 
 demonio.habilidad.push (
-  {nombre: '💪', id: 'boton-fuerza'},
-  {nombre: '💪', id: 'boton-fuerza'},
-  {nombre: '💪', id: 'boton-fuerza'}, 
-  {nombre: '🏃‍♂️', id: 'boton-velocidad'},
-  {nombre: '🧠', id: 'boton-inteligencia'}, 
+  {nombre: '💪', id: 'boton-fuerza', class: 'tarjetasPeleaA'},
+  {nombre: '💪', id: 'boton-fuerza', class: 'tarjetasPeleaA'},
+  {nombre: '💪', id: 'boton-fuerza', class: 'tarjetasPeleaA'}, 
+  {nombre: '🏃‍♂️', id: 'boton-velocidad', class: 'tarjetasPeleaB'},
+  {nombre: '🧠', id: 'boton-inteligencia', class: 'tarjetasPeleaC'}, 
 )
 
 angel.habilidad.push (
-  {nombre: '🏃‍♂️', id: 'boton-velocidad'},
-  {nombre: '🏃‍♂️', id: 'boton-velocidad'},
-  {nombre: '🏃‍♂️', id: 'boton-velocidad'},
-  {nombre: '💪', id: 'boton-fuerza'}, 
-  {nombre: '🧠', id: 'boton-inteligencia'}, 
+  {nombre: '🏃‍♂️', id: 'boton-velocidad', class: 'tarjetasPeleaB'},
+  {nombre: '🏃‍♂️', id: 'boton-velocidad', class: 'tarjetasPeleaB'},
+  {nombre: '🏃‍♂️', id: 'boton-velocidad', class: 'tarjetasPeleaB'},
+  {nombre: '💪', id: 'boton-fuerza', class: 'tarjetasPeleaA'}, 
+  {nombre: '🧠', id: 'boton-inteligencia', class: 'tarjetasPeleaC'}, 
 )
 
 humano.habilidad.push (
-  {nombre: '🧠', id: 'boton-inteligencia'},
-  {nombre: '🧠', id: 'boton-inteligencia'},
-  {nombre: '🧠', id: 'boton-inteligencia'},
-  {nombre: '💪', id: 'boton-fuerza'}, 
-  {nombre: '🏃‍♂️', id: 'boton-velocidad'},
+  {nombre: '🧠', id: 'boton-inteligencia', class: 'tarjetasPeleaC'},
+  {nombre: '🧠', id: 'boton-inteligencia', class: 'tarjetasPeleaC'},
+  {nombre: '🧠', id: 'boton-inteligencia', class: 'tarjetasPeleaC'},
+  {nombre: '💪', id: 'boton-fuerza', class: 'tarjetasPeleaA'}, 
+  {nombre: '🏃‍♂️', id: 'boton-velocidad', class: 'tarjetasPeleaB'},
 )
 
 seres.push(demonio,angel,humano)
@@ -74,13 +77,17 @@ function iniciarJuego () {
   sectionDestreza.style.display = 'none' 
   seres.forEach((serx) => {
     opcionDeSeres = `
-    <input type="radio" name="ser" id=${serx.nombre1}/>
-    <label class="tarjetasSerDemonio" for=${serx.nombre1}>
+    <input type="radio" name="ser" id=${serx.nombre1} />
+    <label class=${serx.tarjeta} for=${serx.nombre1} >
     <p2>${serx.nombre1}</p2>
-    <img src=${serx.foto} alt=${serx.nombre1}>
+    <img src=${serx.foto} alt=${serx.nombre1} >
     </label>
     `
     contenedorSeres.innerHTML += opcionDeSeres
+
+    inputDemonio = document.getElementById('Demonio')
+    inputAngel = document.getElementById('Angel')
+    inputHumano = document.getElementById('Humano')
 
   })
   sectionReiniciar.style.display = 'none'
@@ -89,9 +96,7 @@ function iniciarJuego () {
   inputAngel.addEventListener('click',botonSeleccionar)
   inputHumano.addEventListener('click',botonSeleccionar)
   botonSerJugador.addEventListener("click",seleccionarSerJugador)
-  botonFuerza.addEventListener('click', habilidadFuerza)
-  botonVelocidad.addEventListener('click', habilidadVelocidad)
-  botonInteligencia.addEventListener('click', habilidadInteligencia)
+  
   botonReiniciar.addEventListener('click', reiniciarJuego)
 }
   
@@ -99,33 +104,65 @@ function seleccionarSerJugador (){
     sectionParrafo.style.display = 'none'
     sectionEleccion.style.display = 'none'
     sectionDestreza.style.display = 'block' 
+    
     if (inputDemonio.checked ){
-      spanSerSeleccionadoA.innerHTML = 'Demonio'
+      spanSerSeleccionadoA.innerHTML = inputDemonio.id
+      serjugador123 = inputDemonio.id
     } else if (inputAngel.checked ){
-      spanSerSeleccionadoA.innerHTML = 'Angel'
+      spanSerSeleccionadoA.innerHTML = inputAngel.id
+      serjugador123 = inputAngel.id
     } else if (inputHumano.checked ){
-      spanSerSeleccionadoA.innerHTML = 'Humano'
+      spanSerSeleccionadoA.innerHTML = inputHumano.id
+      serjugador123 =inputHumano.id
     } else {
       alert ('Selecciona cualquiera de los seres vivos')
     } 
-      serEnemigo()
+    extraerHabilidad(serjugador123)  
+    serEnemigo()
    }
+
+function extraerHabilidad(serjugador123){
+  let habilidades
+  for (let i = 0; i < seres.length; i++) {
+    if (serjugador123 == seres[i].nombre1 ){
+      habilidades = seres[i].habilidad
+    }
+  }
+
+ mostrarHabilidad(habilidades) 
+}
+function mostrarHabilidad(habilidades){
+  habilidades.forEach((habilidades) => {
+    ataquesHabilidad =`
+    <button class =${habilidades.class} " id=${habilidades.id} >${habilidades.nombre}</button>
+    `
+    contenedorPelea.innerHTML += ataquesHabilidad
+  })
+   botonFuerza = document.getElementById('boton-fuerza')
+   botonVelocidad = document.getElementById('boton-velocidad')
+   botonInteligencia = document.getElementById('boton-inteligencia')
+  
+   botonFuerza.addEventListener('click', habilidadFuerza)
+  botonVelocidad.addEventListener('click', habilidadVelocidad)
+  botonInteligencia.addEventListener('click', habilidadInteligencia)
+}
   function botonSeleccionar (){
     botonSerElegido.style.display = 'block'
    }
  function serEnemigo () {
-    let serEnemigo = aleatorio(1,3)
-    let spanSerEnemigo = document.getElementById('serPc')
-    if (serEnemigo == 1){
-      spanSerEnemigo.innerHTML = 'Demonio'
-      document.getElementById('nombreJugadorK').innerHTML = nombre   
-    } else if (serEnemigo == 2){
-       spanSerEnemigo.innerHTML = 'Angel'
-      document.getElementById('nombreJugadorK').innerHTML = nombre   
-    } else if (serEnemigo == 3){
-      spanSerEnemigo.innerHTML = 'Humano'
-      document.getElementById('nombreJugadorK').innerHTML = nombre   
-    }
+    let serEnemigo = aleatorio(0, seres.length -1)
+    
+    spanSerEnemigo.innerHTML =  seres[serEnemigo].nombre1
+    //if (serEnemigo == 1){
+      //spanSerEnemigo.innerHTML = 'Demonio'
+      //document.getElementById('nombreJugadorK').innerHTML = nombre   
+   // } else if (serEnemigo == 2){
+       //spanSerEnemigo.innerHTML = 'Angel'
+      //document.getElementById('nombreJugadorK').innerHTML = nombre   
+    //} else if (serEnemigo == 3){
+     // spanSerEnemigo.innerHTML = 'Humano'
+      //document.getElementById('nombreJugadorK').innerHTML = nombre   
+    //}
     }
  function habilidadFuerza () {
    habilidadSer = 'Fuerza'
