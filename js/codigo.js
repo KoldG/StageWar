@@ -4,8 +4,8 @@ let habilidadSer
 let habilidadEnemigo = []
 let opcionDeSeres
 let serjugador123
-let vidasSerJJ = 3
-let vidasEnemigoPC = 3
+let vidasSerJJ = 0
+let vidasEnemigoPC = 0
 let ataquesHabilidad
 let botonFuerza 
 let botonVelocidad 
@@ -14,6 +14,8 @@ let ataqueSerEnemigo
 let indexAtaqueEnemigo
 let indexAtaqueJugador
 let botones = []
+let victoriasJugador = 0
+let victoriasEnemigo = 0
 let ataqueJugador = []
 let seres = []
 
@@ -29,8 +31,8 @@ const sectionEleccion = document.getElementById('escoge')
 const spanSerSeleccionadoA = document.getElementById('serSeleccionadoA')
 const mensajeResultado = document.getElementById('pili')
 const contenedorPelea = document.getElementById('pelea')
-const spanVidasSer = document.getElementById('vidasSer')
-const spanVidasEnemigo = document.getElementById('vidasEnemigo')
+let spanVidasSer = document.getElementById('vidasSer')
+let spanVidasEnemigo = document.getElementById('vidasEnemigo')
 
 let inputDemonio 
 let inputAngel 
@@ -157,17 +159,20 @@ function secuenciaAtaque(){
         ataqueJugador.push('Fuerza')
         console.log(ataqueJugador)
         boton.style.background = '#112f58'
+        boton.disabled = true 
         spanJugador.innerHTML = 'Fuerza'
       } else if (e.target.textContent == '🏃‍♂️'){
         ataqueJugador.push('Velocidad')
         console.log(ataqueJugador)
         boton.style.background = '#112f58'
+        boton.disabled = true 
         spanJugador.innerHTML = 'Velocidad'
       } else {
         ataqueJugador.push('Inteligencia')
         console.log(ataqueJugador)
         boton.style.background = '#112f58'
         spanJugador.innerHTML = 'Inteligencia'
+        boton.disabled = true 
       }
       habilidadAEnemigo ()
     })
@@ -228,14 +233,15 @@ function iniciarPelea(){
       
     } else if (ataqueJugador[index] == 'Fuerza' && habilidadEnemigo[index] == 'Velocidad' || ataqueJugador[index] == 'Velocidad' && habilidadEnemigo[index] == 'Inteligencia' || ataqueJugador[index] == 'Inteligencia' && habilidadEnemigo[index] == 'Fuerza') {
       indexAmbosOponentes(index, index)
-      crearMensaje('Ganaste')
-      vidasEnemigoPC--
-      spanVidasEnemigo.innerHTML = vidasEnemigoPC
+      
+      victoriasJugador++
+      spanVidasSer.innerHTML = victoriasJugador
+    
     }else {
       indexAmbosOponentes(index, index)
-      crearMensaje('Perdiste')
-      vidasSerJJ--
-      spanVidasSer.innerHTML = vidasSerJJ
+      
+      victoriasEnemigo++
+      spanVidasEnemigo.innerHTML = victoriasEnemigo
     }
     
   }
@@ -244,23 +250,27 @@ function iniciarPelea(){
   vidasFinal()
 }
 function vidasFinal () {
-  if (vidasEnemigoPC == 0){
+  if (victoriasJugador > victoriasEnemigo){
+    crearMensaje('Ganaste')
     mensajeVidasFinal("Fue una victoria maravillosa")
     let sectionReiniciar = document.getElementById('reiniciar')
   sectionReiniciar.style.display = 'flex'
-  } else if (vidasSerJJ == 0){
+  } else if (victoriasJugador < victoriasEnemigo){
+    crearMensaje('Perdiste')
     mensajeVidasFinal("La derrota es lo peor que se puede saborear")
     let sectionReiniciar = document.getElementById('reiniciar')
   sectionReiniciar.style.display = 'flex'
+  } else {
+    mensajeVidasFinal("Vaya, al parecer este enemigo tuvo mucho para dar!")
+    let sectionReiniciar = document.getElementById('reiniciar')
+    sectionReiniciar.style.display = 'flex'
   }
 }
 function mensajeVidasFinal (terminado){
   let fin = document.createElement('p')
   fin.innerHTML = terminado
   mensajeResultado.appendChild(fin)
-  botonFuerza.disabled = true 
-  botonVelocidad.disabled = true
-  botonInteligencia.disabled = true
+  
 }
 function reiniciarJuego (){
   location.reload()
