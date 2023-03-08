@@ -1,7 +1,7 @@
  let nombre = ""
 // nombre = prompt("Ingresa tu nombre")
 let habilidadSer
-let habilidadEnemigo
+let habilidadEnemigo = []
 let opcionDeSeres
 let serjugador123
 let vidasSerJJ = 3
@@ -10,7 +10,11 @@ let ataquesHabilidad
 let botonFuerza 
 let botonVelocidad 
 let botonInteligencia 
-
+let ataqueSerEnemigo
+let indexAtaqueEnemigo
+let indexAtaqueJugador
+let botones = []
+let ataqueJugador = []
 let seres = []
 
 const contenedorSeres = document.getElementById('contenedorSeres')
@@ -25,6 +29,8 @@ const sectionEleccion = document.getElementById('escoge')
 const spanSerSeleccionadoA = document.getElementById('serSeleccionadoA')
 const mensajeResultado = document.getElementById('pili')
 const contenedorPelea = document.getElementById('pelea')
+const spanVidasSer = document.getElementById('vidasSer')
+const spanVidasEnemigo = document.getElementById('vidasEnemigo')
 
 let inputDemonio 
 let inputAngel 
@@ -119,7 +125,7 @@ function seleccionarSerJugador (){
     } 
     extraerHabilidad(serjugador123)  
     serEnemigo()
-   }
+}
 
 function extraerHabilidad(serjugador123){
   let habilidades
@@ -134,25 +140,51 @@ function extraerHabilidad(serjugador123){
 function mostrarHabilidad(habilidades){
   habilidades.forEach((habilidades) => {
     ataquesHabilidad =`
-    <button class =${habilidades.class} " id=${habilidades.id} >${habilidades.nombre}</button>
+    <button class ='${habilidades.class} BAtaque' id=${habilidades.id} >${habilidades.nombre}</button>
     `
     contenedorPelea.innerHTML += ataquesHabilidad
   })
-   botonFuerza = document.getElementById('boton-fuerza')
-   botonVelocidad = document.getElementById('boton-velocidad')
-   botonInteligencia = document.getElementById('boton-inteligencia')
+  botonFuerza = document.getElementById('boton-fuerza')
+  botonVelocidad = document.getElementById('boton-velocidad')
+  botonInteligencia = document.getElementById('boton-inteligencia')
+  botones = document.querySelectorAll('.BAtaque')
+
   
-   botonFuerza.addEventListener('click', habilidadFuerza)
-  botonVelocidad.addEventListener('click', habilidadVelocidad)
-  botonInteligencia.addEventListener('click', habilidadInteligencia)
+  //botonFuerza.addEventListener('click', habilidadFuerza)
+  //botonVelocidad.addEventListener('click', habilidadVelocidad)
+  //botonInteligencia.addEventListener('click', habilidadInteligencia)
 }
-  function botonSeleccionar (){
+function secuenciaAtaque(){
+  botones.forEach((boton) => {
+    boton.addEventListener('click', (e) => {
+      if(e.target.textContent == '💪'){
+        ataqueJugador.push('Fuerza')
+        console.log(ataqueJugador)
+        boton.style.background = '#112f58'
+      } else if (e.target.textContent == '🏃‍♂️'){
+        ataqueJugador.push('Velocidad')
+        console.log(ataqueJugador)
+        boton.style.background = '#112f58'
+      } else {
+        ataqueJugador.push('Inteligencia')
+        console.log(ataqueJugador)
+        boton.style.background = '#112f58'
+      }
+      habilidadAEnemigo ()
+    })
+  })
+  
+}
+function botonSeleccionar (){
     botonSerElegido.style.display = 'block'
-   }
+}
  function serEnemigo () {
     let serEnemigo = aleatorio(0, seres.length -1)
     
     spanSerEnemigo.innerHTML =  seres[serEnemigo].nombre1
+    ataqueSerEnemigo = seres[serEnemigo].habilidad
+
+    secuenciaAtaque()
     //if (serEnemigo == 1){
       //spanSerEnemigo.innerHTML = 'Demonio'
       //document.getElementById('nombreJugadorK').innerHTML = nombre   
@@ -163,38 +195,45 @@ function mostrarHabilidad(habilidades){
      // spanSerEnemigo.innerHTML = 'Humano'
       //document.getElementById('nombreJugadorK').innerHTML = nombre   
     //}
-    }
- function habilidadFuerza () {
-   habilidadSer = 'Fuerza'
-   document.getElementById('habilidadJJ').innerHTML = 'Fuerza'
-   habilidadAEnemigo ()
- }
- function habilidadVelocidad () {
-   habilidadSer = 'Velocidad'
-   document.getElementById('habilidadJJ').innerHTML = 'Velocidad'
-   habilidadAEnemigo ()
- }
- function habilidadInteligencia () {
-   habilidadSer = 'Inteligencia'
-   document.getElementById('habilidadJJ').innerHTML = 'Inteligencia'
-   habilidadAEnemigo ()
- }
- function habilidadAEnemigo () {
-   let habilidadAleatorio= aleatorio(1,3) 
+}
+// function habilidadFuerza () {
+ //  habilidadSer = 'Fuerza'
+ //  document.getElementById('habilidadJJ').innerHTML = 'Fuerza'
+ //  habilidadAEnemigo ()
+///}
+//function habilidadVelocidad () {
+   //habilidadSer = 'Velocidad'
+   //document.getElementById('habilidadJJ').innerHTML = 'Velocidad'
+  // habilidadAEnemigo ()
+//}
+////function habilidadInteligencia () {
+   //habilidadSer = 'Inteligencia'
+   //document.getElementById('habilidadJJ').innerHTML = 'Inteligencia'
+   //habilidadAEnemigo ()
+//}
+function habilidadAEnemigo () {
+   let habilidadAleatorio= aleatorio(0,ataqueSerEnemigo.length -1) 
    let spanHabilidadEnemigo = document.getElementById('habilidadPC')
    
-   if (habilidadAleatorio == 1){
-    habilidadEnemigo = 'Fuerza' 
+   if (habilidadAleatorio == 0 || habilidadAleatorio == 1){
+    habilidadEnemigo.push('Fuerza') 
     spanHabilidadEnemigo.innerHTML = 'Fuerza'
-   } else if (habilidadAleatorio == 2) {
-    habilidadEnemigo = 'Velocidad'  
+   } else if (habilidadAleatorio == 3 || habilidadAleatorio == 4) {
+    habilidadEnemigo.push('Velocidad')  
     spanHabilidadEnemigo.innerHTML = 'Velocidad'
-   }else if (habilidadAleatorio == 3){
+   }else if (habilidadAleatorio == 2){
     spanHabilidadEnemigo.innerHTML = 'Inteligencia'
-    habilidadEnemigo = 'Inteligencia'
+    habilidadEnemigo.push('Inteligencia')
    }
-   resultadoJuego()
- }
+   
+   iniciarPelea()
+   
+}
+function iniciarPelea(){
+  if (ataqueJugador.length == 5){
+    resultadoJuego()
+  }
+}
  function crearMensaje(resultado) {
   let mensajeResultado = document.getElementById('mensajes')
   let mensajeResultadoA = document.getElementById('resultadoA')
@@ -203,9 +242,20 @@ function mostrarHabilidad(habilidades){
   // parrafo.innerHTML = 'Escogiste ' + habilidadSer + ', Tu enemigo escogio ' + habilidadEnemigo + ' ' + resultado
   // mensajeResultado.appendChild(parrafo)
  }
+ function indexAmbosOponentes(jugador, enemigo){
+    indexAtaqueJugador = ataqueJugador[jugador]
+    indexAtaqueEnemigo = habilidadEnemigo[enemigo]
+ }
+ 
  function resultadoJuego() {
-  let spanVidasSer = document.getElementById('vidasSer')
-  let spanVidasEnemigo = document.getElementById('vidasEnemigo')
+  for (let index = 0; index < ataqueJugador.length; index++) {
+    if(ataqueJugador[index] == habilidadEnemigo[index]) {
+      indexAmbosOponentes(index, index)
+      crearMensaje('Empate') 
+    }
+    
+  }
+
   if (habilidadSer == habilidadEnemigo){
     crearMensaje('Empate') 
   }  else if ((habilidadSer == 'Fuerza' && habilidadEnemigo == 'Velocidad') || (habilidadSer == 'Velocidad' && habilidadEnemigo == 'Inteligencia') || (habilidadSer == 'Inteligencia' && habilidadEnemigo == 'Fuerza')) {
