@@ -148,27 +148,26 @@ function mostrarHabilidad(habilidades){
   botonVelocidad = document.getElementById('boton-velocidad')
   botonInteligencia = document.getElementById('boton-inteligencia')
   botones = document.querySelectorAll('.BAtaque')
-
-  
-  //botonFuerza.addEventListener('click', habilidadFuerza)
-  //botonVelocidad.addEventListener('click', habilidadVelocidad)
-  //botonInteligencia.addEventListener('click', habilidadInteligencia)
 }
 function secuenciaAtaque(){
+  let spanJugador = document.getElementById('habilidadJJ')
   botones.forEach((boton) => {
     boton.addEventListener('click', (e) => {
       if(e.target.textContent == '💪'){
         ataqueJugador.push('Fuerza')
         console.log(ataqueJugador)
         boton.style.background = '#112f58'
+        spanJugador.innerHTML = 'Fuerza'
       } else if (e.target.textContent == '🏃‍♂️'){
         ataqueJugador.push('Velocidad')
         console.log(ataqueJugador)
         boton.style.background = '#112f58'
+        spanJugador.innerHTML = 'Velocidad'
       } else {
         ataqueJugador.push('Inteligencia')
         console.log(ataqueJugador)
         boton.style.background = '#112f58'
+        spanJugador.innerHTML = 'Inteligencia'
       }
       habilidadAEnemigo ()
     })
@@ -185,32 +184,9 @@ function botonSeleccionar (){
     ataqueSerEnemigo = seres[serEnemigo].habilidad
 
     secuenciaAtaque()
-    //if (serEnemigo == 1){
-      //spanSerEnemigo.innerHTML = 'Demonio'
-      //document.getElementById('nombreJugadorK').innerHTML = nombre   
-   // } else if (serEnemigo == 2){
-       //spanSerEnemigo.innerHTML = 'Angel'
-      //document.getElementById('nombreJugadorK').innerHTML = nombre   
-    //} else if (serEnemigo == 3){
-     // spanSerEnemigo.innerHTML = 'Humano'
-      //document.getElementById('nombreJugadorK').innerHTML = nombre   
-    //}
+  
 }
-// function habilidadFuerza () {
- //  habilidadSer = 'Fuerza'
- //  document.getElementById('habilidadJJ').innerHTML = 'Fuerza'
- //  habilidadAEnemigo ()
-///}
-//function habilidadVelocidad () {
-   //habilidadSer = 'Velocidad'
-   //document.getElementById('habilidadJJ').innerHTML = 'Velocidad'
-  // habilidadAEnemigo ()
-//}
-////function habilidadInteligencia () {
-   //habilidadSer = 'Inteligencia'
-   //document.getElementById('habilidadJJ').innerHTML = 'Inteligencia'
-   //habilidadAEnemigo ()
-//}
+
 function habilidadAEnemigo () {
    let habilidadAleatorio= aleatorio(0,ataqueSerEnemigo.length -1) 
    let spanHabilidadEnemigo = document.getElementById('habilidadPC')
@@ -238,9 +214,6 @@ function iniciarPelea(){
   let mensajeResultado = document.getElementById('mensajes')
   let mensajeResultadoA = document.getElementById('resultadoA')
   mensajeResultadoA.innerHTML = resultado
-  // let parrafo = document.createElement('p')
-  // parrafo.innerHTML = 'Escogiste ' + habilidadSer + ', Tu enemigo escogio ' + habilidadEnemigo + ' ' + resultado
-  // mensajeResultado.appendChild(parrafo)
  }
  function indexAmbosOponentes(jugador, enemigo){
     indexAtaqueJugador = ataqueJugador[jugador]
@@ -252,21 +225,22 @@ function iniciarPelea(){
     if(ataqueJugador[index] == habilidadEnemigo[index]) {
       indexAmbosOponentes(index, index)
       crearMensaje('Empate') 
+      
+    } else if (ataqueJugador[index] == 'Fuerza' && habilidadEnemigo[index] == 'Velocidad' || ataqueJugador[index] == 'Velocidad' && habilidadEnemigo[index] == 'Inteligencia' || ataqueJugador[index] == 'Inteligencia' && habilidadEnemigo[index] == 'Fuerza') {
+      indexAmbosOponentes(index, index)
+      crearMensaje('Ganaste')
+      vidasEnemigoPC--
+      spanVidasEnemigo.innerHTML = vidasEnemigoPC
+    }else {
+      indexAmbosOponentes(index, index)
+      crearMensaje('Perdiste')
+      vidasSerJJ--
+      spanVidasSer.innerHTML = vidasSerJJ
     }
     
   }
 
-  if (habilidadSer == habilidadEnemigo){
-    crearMensaje('Empate') 
-  }  else if ((habilidadSer == 'Fuerza' && habilidadEnemigo == 'Velocidad') || (habilidadSer == 'Velocidad' && habilidadEnemigo == 'Inteligencia') || (habilidadSer == 'Inteligencia' && habilidadEnemigo == 'Fuerza')) {
-    crearMensaje('Ganaste')
-    vidasEnemigoPC--
-    spanVidasEnemigo.innerHTML = vidasEnemigoPC
-  } else {
-    crearMensaje('Perdiste')
-    vidasSerJJ--
-    spanVidasSer.innerHTML = vidasSerJJ 
-  }
+  
   vidasFinal()
 }
 function vidasFinal () {
