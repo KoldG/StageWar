@@ -23,14 +23,14 @@ const sectionDestreza = document.getElementById('destreza')
 const sectionReiniciar = document.getElementById('reiniciar')
 const botonSerElegido = document.getElementById('serElegido')
 
-
+const sectionParrafo = document.getElementById('parrafo')
+const sectionEleccion = document.getElementById('escoge')
+const spanSerSeleccionadoA = document.getElementById('serSeleccionadoA')
 
 const contenedorSeres = document.getElementById('contenedorSeres')
 const spanSerEnemigo = document.getElementById('serPc')
 const botonReiniciar = document.getElementById('reiniciar')
-const sectionParrafo = document.getElementById('parrafo')
-const sectionEleccion = document.getElementById('escoge')
-const spanSerSeleccionadoA = document.getElementById('serSeleccionadoA')
+
 const mensajeResultado = document.getElementById('pili')
 const contenedorPelea = document.getElementById('pelea')
 let spanVidasSer = document.getElementById('vidasSer')
@@ -132,12 +132,13 @@ function seleccionarSerJugador (){
       serjugador123 = inputAngel.id
     } else if (inputHumano.checked ){
       spanSerSeleccionadoA.innerHTML = inputHumano.id
-      serjugador123 =inputHumano.id
+      serjugador123 = inputHumano.id
     } else {
       alert ('Selecciona cualquiera de los seres vivos')
     } 
-    extraerHabilidad(serjugador123)  
+    extraerHabilidad(serjugador123) 
     serEnemigo()
+     
 }
 
 function extraerHabilidad(serjugador123){
@@ -161,6 +162,7 @@ function mostrarHabilidad(habilidades){
   botonVelocidad = document.getElementById('boton-velocidad')
   botonInteligencia = document.getElementById('boton-inteligencia')
   botones = document.querySelectorAll('.BAtaque')
+  
 }
 function secuenciaAtaque(){
   let spanJugador = document.getElementById('habilidadJJ')
