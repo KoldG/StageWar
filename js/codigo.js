@@ -19,12 +19,14 @@ let victoriasEnemigo = 0
 let ataqueJugador = []
 let seres = []
 
-const contenedorSeres = document.getElementById('contenedorSeres')
 const sectionDestreza = document.getElementById('destreza')
 const sectionReiniciar = document.getElementById('reiniciar')
 const botonSerElegido = document.getElementById('serElegido')
+
+
+
+const contenedorSeres = document.getElementById('contenedorSeres')
 const spanSerEnemigo = document.getElementById('serPc')
-const botonSerJugador = document.getElementById("serElegido")
 const botonReiniciar = document.getElementById('reiniciar')
 const sectionParrafo = document.getElementById('parrafo')
 const sectionEleccion = document.getElementById('escoge')
@@ -37,6 +39,7 @@ let spanVidasEnemigo = document.getElementById('vidasEnemigo')
 let inputDemonio 
 let inputAngel 
 let inputHumano 
+
 class Ser {
   constructor(nombre1, foto, vida, tarjeta){
     this.nombre1 = nombre1
@@ -83,6 +86,8 @@ seres.push(demonio,angel,humano)
 
 function iniciarJuego () {
   sectionDestreza.style.display = 'none' 
+  sectionReiniciar.style.display = 'none'
+  botonSerElegido.style.display = 'none'
   seres.forEach((serx) => {
     opcionDeSeres = `
     <input type="radio" name="ser" id=${serx.nombre1} />
@@ -98,16 +103,22 @@ function iniciarJuego () {
     inputHumano = document.getElementById('Humano')
 
   })
-  sectionReiniciar.style.display = 'none'
-  botonSerElegido.style.display = 'none'
+  botonSerElegido.addEventListener('click', seleccionarSerJugador)
+
+
   inputDemonio.addEventListener('click',botonSeleccionar)
   inputAngel.addEventListener('click',botonSeleccionar)
   inputHumano.addEventListener('click',botonSeleccionar)
-  botonSerJugador.addEventListener("click",seleccionarSerJugador)
   
   botonReiniciar.addEventListener('click', reiniciarJuego)
-}
   
+}
+  //.........................................................................
+
+  function botonSeleccionar (){
+    botonSerElegido.style.display = 'block'
+  
+}
 function seleccionarSerJugador (){
     sectionParrafo.style.display = 'none'
     sectionEleccion.style.display = 'none'
