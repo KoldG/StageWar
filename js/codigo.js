@@ -37,8 +37,6 @@ const botonReiniciar = document.getElementById('reiniciar')
 const mensajeResultado = document.getElementById('pili')
 const contenedorPelea = document.getElementById('pelea')
 
-const sectionVerMapa = document.getElementById('verMapa')
-const mapa = document.getElementById('mapa')
 
 let spanVidasSer = document.getElementById('vidasSer')
 let spanVidasEnemigo = document.getElementById('vidasEnemigo')
@@ -47,17 +45,18 @@ let inputDemonio
 let inputAngel 
 let inputHumano 
 
+const verMapa = document.getElementById('verMapa')
+const mapa = document.getElementById('mapa')
+let lienzo = mapa.getContext('2d')
+let intervalo
+let mapaBackground = new Image()
+mapaBackground.src = 'assets/mokemap.png'
+let serJugadorObjeto 
 
-
-let lienzo = mapa.getContext("2d")
-let intervalo 
-let mapaBackground =new Image()
-mapaBackground.src = "assets/mokemap.png"
-let serObjetoJugar 
 
 
 class Ser {
-  constructor(nombre1, foto, vida, tarjeta, x = 10 , y = 10, mapaFoto ){
+  constructor(nombre1, foto, vida, tarjeta, ){
     this.nombre1 = nombre1
     this.foto = foto
     this.vida = vida
@@ -65,10 +64,10 @@ class Ser {
     this.tarjeta = tarjeta
     this.x = 20
     this.y = 30
-    this.ancho = 40
-    this.alto = 40
+    this.ancho = 80
+    this.alto = 80
     this.mapaFoto = new Image()
-    this.mapaFoto.src = mapaFoto
+    this.mapaFoto.src = foto
     this.velocidadX = 0
     this.velocidadY = 0
   }
@@ -117,8 +116,9 @@ function iniciarJuego () {
   sectionDestreza.style.display = 'none' 
   sectionReiniciar.style.display = 'none'
   botonSerElegido.style.display = 'none'
-  sectionVerMapa.style.display = 'none'
-  //mapa.style.display = 'none'
+  verMapa.style.display = 'none'
+  
+
 
   seres.forEach((serx) => {
     opcionDeSeres = `
@@ -145,7 +145,7 @@ function iniciarJuego () {
   botonReiniciar.addEventListener('click', reiniciarJuego)
   
 }
-  //.........................................................................
+  
 
   function botonSeleccionar (){
     botonSerElegido.style.display = 'block'
@@ -154,12 +154,8 @@ function iniciarJuego () {
 function seleccionarSerJugador (){
     sectionParrafo.style.display = 'none'
     sectionEleccion.style.display = 'none'
-    // sectionDestreza.style.display = 'block' 
-    sectionVerMapa.style.display = 'flex'
-    
-    window.addEventListener('keydown', sePresionoUnaTecla)
-    window.addEventListener('keyup', detenerMovimiento)
-    
+    //sectionDestreza.style.display = 'block' 
+    verMapa.style.display = 'flex'
     
     
     if (inputDemonio.checked ){
@@ -335,71 +331,88 @@ function reiniciarJuego (){
  function aleatorio(min,max){
     return Math.floor(Math.random() * (max - min + 1) + min)
  }
+ //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ function pintarCanvas(){
 
- function pintarCanvas () {
   
-  serObjetoJugar.x = serObjetoJugar.x + serObjetoJugar.velocidadX
-  serObjetoJugar.y = serObjetoJugar.y + serObjetoJugar.velocidadY
-  lienzo.clearRect(0,0, mapa.width, mapa.height)
+  serJugadorObjeto.x = serJugadorObjeto.x + serJugadorObjeto.velocidadX
+  serJugadorObjeto.y = serJugadorObjeto.y + serJugadorObjeto.velocidadY
+  lienzo.clearRect(0, 0, mapa.width, mapa.height)
   lienzo.drawImage(
-    serObjetoJugar.mapaFoto, 
-    serObjetoJugar.x,
-    serObjetoJugar.y,
-    serObjetoJugar.ancho,
-    serObjetoJugar.alto
+    mapaBackground,
+    0,
+    0,
+    mapa.width,
+    mapa.height
   )
+  lienzo.drawImage(
+    serJugadorObjeto.mapaFoto,
+    serJugadorObjeto.x,
+    serJugadorObjeto.y,
+    serJugadorObjeto.ancho,
+    serJugadorObjeto.alto
+
+  )
+
  }
 
  function moverDerecha(){
-  serObjetoJugar.velocidadX = 5
+    serJugadorObjeto.velocidadX = 5
  }
  function moverIzquierda(){
-  serObjetoJugar.velocidadX = -5
- }
- function moverAbajo(){
-  serObjetoJugar.velocidadY = 5
- }
- function moverArriba(){
-  serObjetoJugar.velocidadY = -5
- }
- function detenerMovimiento(){
-  
-  serObjetoJugar.velocidadX = 0
-  serObjetoJugar.velocidadY = 0
- }
- function sePresionoUnaTecla(event){
+  serJugadorObjeto.velocidadX = -5 
+}
+
+function moverAbajo(){
+  serJugadorObjeto.velocidadY = 5 
+}
+
+function moverArriba(){
+  serJugadorObjeto.velocidadY = -5
+}
+function detenerMovimiento(){
+  serJugadorObjeto.velocidadX = 0
+  serJugadorObjeto.velocidadY = 0
+}
+
+function sePresionoUnaTecla(event){
   switch (event.key) {
     case 'ArrowUp':
       moverArriba()
-      break;
-    case 'ArrowDown' :
-      moverAbajo()
-      break;
-    case 'ArrowLeft':
-      moverIzquierda()
-      break;
-    case 'ArrowRight':
-      moverDerecha()
-      break;
+      break
+      case 'ArrowDown':
+        moverAbajo()
+        break
+      case 'ArrowLeft':
+        moverIzquierda()
+        break
+      case 'ArrowRight':
+        moverDerecha()
+        break
     default:
       break;
   }
- }
- function iniciarMapa(){ 
+}
+
+function iniciarMapa(){
   mapa.width = 320
   mapa.height = 240
-  serObjetoJugar = obtenerObjetoSer(serjugador123)
-  
+  serJugadorObjeto = obtenerObjetoSer(serjugador123)
+  console.log(serJugadorObjeto, serjugador123);
   intervalo = setInterval(pintarCanvas, 50)
 
-  window.addEventListener('keydown', sePresionoUnaTecla)
-  window.addEventListener('keyup', detenerMovimiento)
- }
- function obtenerObjetoSer(){
+    window.addEventListener('keydown', sePresionoUnaTecla)
+    window.addEventListener('keyup', detenerMovimiento)    
+}
+
+function obtenerObjetoSer(){
   for (let i = 0; i < seres.length; i++) {
     if (serjugador123 === seres[i].nombre1 ){
-      return seres[i].nombre1
+      return seres[i]
     }
   }
- }
+}
+
+
+  
  window.addEventListener('load', iniciarJuego)
