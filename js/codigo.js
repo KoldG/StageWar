@@ -57,7 +57,7 @@ let serObjetoJugar
 
 
 class Ser {
-  constructor(nombre1, foto, vida, tarjeta, fotoMapa, x = 10 , y = 10, ){
+  constructor(nombre1, foto, vida, tarjeta, x = 10 , y = 10, mapaFoto ){
     this.nombre1 = nombre1
     this.foto = foto
     this.vida = vida
@@ -68,7 +68,7 @@ class Ser {
     this.ancho = 40
     this.alto = 40
     this.mapaFoto = new Image()
-    this.mapaFoto.src = fotoMapa
+    this.mapaFoto.src = mapaFoto
     this.velocidadX = 0
     this.velocidadY = 0
   }
@@ -398,7 +398,7 @@ function reiniciarJuego (){
  function obtenerObjetoSer(){
   for (let i = 0; i < seres.length; i++) {
     if (serjugador123 === seres[i].nombre1 ){
-      return seres[i]
+      return seres[i].nombre1
     }
   }
  }
