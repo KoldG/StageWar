@@ -3,21 +3,24 @@
 let habilidadSer
 let habilidadEnemigo = []
 let opcionDeSeres
-let serjugador123
 let vidasSerJJ = 0
 let vidasEnemigoPC = 0
-let ataquesHabilidad
+
 let botonFuerza 
 let botonVelocidad 
 let botonInteligencia 
 let ataqueSerEnemigo
 let indexAtaqueEnemigo
 let indexAtaqueJugador
-let botones = []
+
 let victoriasJugador = 0
 let victoriasEnemigo = 0
 let ataqueJugador = []
 let seres = []
+let botones = []
+
+let serjugador123
+let ataquesHabilidad
 
 const sectionDestreza = document.getElementById('destreza')
 const sectionReiniciar = document.getElementById('reiniciar')
@@ -33,6 +36,10 @@ const botonReiniciar = document.getElementById('reiniciar')
 
 const mensajeResultado = document.getElementById('pili')
 const contenedorPelea = document.getElementById('pelea')
+
+const sectionVerMapa = document.getElementById('verMapa')
+const mapa = document.getElementById('mapa')
+
 let spanVidasSer = document.getElementById('vidasSer')
 let spanVidasEnemigo = document.getElementById('vidasEnemigo')
 
@@ -40,23 +47,45 @@ let inputDemonio
 let inputAngel 
 let inputHumano 
 
+
+
+let lienzo = mapa.getContext("2d")
+let intervalo 
+let mapaBackground =new Image()
+mapaBackground.src = "assets/mokemap.png"
+let serObjetoJugar 
+
+
 class Ser {
-  constructor(nombre1, foto, vida, tarjeta){
+  constructor(nombre1, foto, vida, tarjeta, fotoMapa, x = 10 , y = 10, ){
     this.nombre1 = nombre1
     this.foto = foto
     this.vida = vida
     this.habilidad = []
     this.tarjeta = tarjeta
-
+    this.x = 20
+    this.y = 30
+    this.ancho = 40
+    this.alto = 40
+    this.mapaFoto = new Image()
+    this.mapaFoto.src = fotoMapa
+    this.velocidadX = 0
+    this.velocidadY = 0
   }
 }
 
 
-let demonio = new Ser('Demonio', 'assets/demonio.avif', 5, "tarjetasSerDemonio")
+let demonio = new Ser('Demonio', 'assets/demonio.avif', 5, "tarjetasSerDemonio", )
 
 let angel = new Ser('Angel', 'assets/angel.jpg', 5, 'tarjetasSerAngel')
 
 let humano = new Ser('Humano', 'assets/humano.jpg', 5, 'tarjetasSerHumano')
+
+let demonioE = new Ser('Demonio', 'assets/demonio.avif', 5, "tarjetasSerDemonio", )
+
+let angelE = new Ser('Angel', 'assets/angel.jpg', 5, 'tarjetasSerAngel')
+
+let humanoE = new Ser('Humano', 'assets/humano.jpg', 5, 'tarjetasSerHumano')
 
 demonio.habilidad.push (
   {nombre: '💪', id: 'boton-fuerza', class: 'tarjetasPeleaA'},
@@ -88,6 +117,9 @@ function iniciarJuego () {
   sectionDestreza.style.display = 'none' 
   sectionReiniciar.style.display = 'none'
   botonSerElegido.style.display = 'none'
+  sectionVerMapa.style.display = 'none'
+  //mapa.style.display = 'none'
+
   seres.forEach((serx) => {
     opcionDeSeres = `
     <input type="radio" name="ser" id=${serx.nombre1} />
@@ -122,7 +154,13 @@ function iniciarJuego () {
 function seleccionarSerJugador (){
     sectionParrafo.style.display = 'none'
     sectionEleccion.style.display = 'none'
-    sectionDestreza.style.display = 'block' 
+    // sectionDestreza.style.display = 'block' 
+    sectionVerMapa.style.display = 'flex'
+    
+    window.addEventListener('keydown', sePresionoUnaTecla)
+    window.addEventListener('keyup', detenerMovimiento)
+    
+    
     
     if (inputDemonio.checked ){
       spanSerSeleccionadoA.innerHTML = inputDemonio.id
@@ -138,16 +176,17 @@ function seleccionarSerJugador (){
     } 
     extraerHabilidad(serjugador123) 
     serEnemigo()
-     
+    iniciarMapa()
 }
 
 function extraerHabilidad(serjugador123){
   let habilidades
   for (let i = 0; i < seres.length; i++) {
-    if (serjugador123 == seres[i].nombre1 ){
+    if (serjugador123 === seres[i].nombre1 ){
       habilidades = seres[i].habilidad
     }
   }
+
 
  mostrarHabilidad(habilidades) 
 }
@@ -162,6 +201,8 @@ function mostrarHabilidad(habilidades){
   botonVelocidad = document.getElementById('boton-velocidad')
   botonInteligencia = document.getElementById('boton-inteligencia')
   botones = document.querySelectorAll('.BAtaque')
+
+  
   
 }
 function secuenciaAtaque(){
@@ -170,21 +211,21 @@ function secuenciaAtaque(){
     boton.addEventListener('click', (e) => {
       if(e.target.textContent == '💪'){
         ataqueJugador.push('Fuerza')
-       // console.log(ataqueJugador)
+
         boton.style.background = '#112f58'
         boton.disabled = true 
         resultadoJuego()
         spanJugador.innerHTML = 'Fuerza'
       } else if (e.target.textContent == '🏃‍♂️'){
         ataqueJugador.push('Velocidad')
-        //console.log(ataqueJugador)
+        
         boton.style.background = '#112f58'
         boton.disabled = true 
         spanJugador.innerHTML = 'Velocidad'
         resultadoJuego()
       } else {
         ataqueJugador.push('Inteligencia')
-        //console.log(ataqueJugador)
+       
         boton.style.background = '#112f58'
         spanJugador.innerHTML = 'Inteligencia'
         boton.disabled = true 
@@ -243,29 +284,28 @@ function iniciarPelea(){
  }
  
  function resultadoJuego() {
-  //for (let index = 0; index < ataqueJugador.length; index++) {
+  for (let index = 0; index < ataqueJugador.length; index++) {
     if(ataqueJugador === habilidadEnemigo) {
-     // indexAmbosOponentes(index, index)
+      indexAmbosOponentes(index, index)
       crearMensaje('Empate') 
       
     } else if (ataqueJugador == 'Fuerza' && habilidadEnemigo == 'Velocidad' || ataqueJugador == 'Velocidad' && habilidadEnemigo == 'Inteligencia' || ataqueJugador == 'Inteligencia' && habilidadEnemigo == 'Fuerza') {
-     // indexAmbosOponentes(index, index)
+      indexAmbosOponentes(index, index)
       crearMensaje('Ganaste') 
       victoriasJugador++
       spanVidasSer.innerHTML = victoriasJugador
       
     }else {
-      //indexAmbosOponentes(index, index)
+      indexAmbosOponentes(index, index)
       crearMensaje('Perdiste') 
       victoriasEnemigo++
       spanVidasEnemigo.innerHTML = victoriasEnemigo
+      
     }
     
   }
-
+}
   
-  
-//}
 function vidasFinal () {
   if (victoriasJugador > victoriasEnemigo){
     crearMensaje('Ganaste')
@@ -294,5 +334,72 @@ function reiniciarJuego (){
 }
  function aleatorio(min,max){
     return Math.floor(Math.random() * (max - min + 1) + min)
+ }
+
+ function pintarCanvas () {
+  
+  serObjetoJugar.x = serObjetoJugar.x + serObjetoJugar.velocidadX
+  serObjetoJugar.y = serObjetoJugar.y + serObjetoJugar.velocidadY
+  lienzo.clearRect(0,0, mapa.width, mapa.height)
+  lienzo.drawImage(
+    serObjetoJugar.mapaFoto, 
+    serObjetoJugar.x,
+    serObjetoJugar.y,
+    serObjetoJugar.ancho,
+    serObjetoJugar.alto
+  )
+ }
+
+ function moverDerecha(){
+  serObjetoJugar.velocidadX = 5
+ }
+ function moverIzquierda(){
+  serObjetoJugar.velocidadX = -5
+ }
+ function moverAbajo(){
+  serObjetoJugar.velocidadY = 5
+ }
+ function moverArriba(){
+  serObjetoJugar.velocidadY = -5
+ }
+ function detenerMovimiento(){
+  
+  serObjetoJugar.velocidadX = 0
+  serObjetoJugar.velocidadY = 0
+ }
+ function sePresionoUnaTecla(event){
+  switch (event.key) {
+    case 'ArrowUp':
+      moverArriba()
+      break;
+    case 'ArrowDown' :
+      moverAbajo()
+      break;
+    case 'ArrowLeft':
+      moverIzquierda()
+      break;
+    case 'ArrowRight':
+      moverDerecha()
+      break;
+    default:
+      break;
+  }
+ }
+ function iniciarMapa(){ 
+  mapa.width = 320
+  mapa.height = 240
+  serObjetoJugar = obtenerObjetoSer(serjugador123)
+  
+  intervalo = setInterval(pintarCanvas, 50)
+
+  window.addEventListener('keydown', sePresionoUnaTecla)
+  window.addEventListener('keyup', detenerMovimiento)
+ }
+ function obtenerObjetoSer(){
+  for (let i = 0; i < seres.length; i++) {
+    if (serjugador123 === seres[i].nombre1 ){
+      return seres[i]
+    }
+  }
  }
  window.addEventListener('load', iniciarJuego)
