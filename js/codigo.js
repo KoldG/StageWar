@@ -10,6 +10,8 @@ let botonFuerza
 let botonVelocidad 
 let botonInteligencia 
 let ataqueSerEnemigo
+
+
 let indexAtaqueEnemigo
 let indexAtaqueJugador
 
@@ -52,41 +54,71 @@ let intervalo
 let mapaBackground = new Image()
 mapaBackground.src = 'assets/mokemap.png'
 let serJugadorObjeto 
+let enemigo
+let alturaQueBuscamos
+let anchoDelMapa = window.innerWidth - 20
+const anchoMaximoDelMapa = 350 
+
+if (anchoDelMapa > anchoMaximoDelMapa){
+  anchoDelMapa = anchoMaximoDelMapa - 20
+}
+
+alturaQueBuscamos = anchoDelMapa * 600 / 800
+
+mapa.width = anchoDelMapa 
+mapa.height = alturaQueBuscamos
 
 
 
 class Ser {
-  constructor(nombre1, foto, vida, tarjeta, ){
+  constructor(nombre1, foto, vida, tarjeta, fotoMapa){
     this.nombre1 = nombre1
     this.foto = foto
     this.vida = vida
     this.habilidad = []
+    this.ancho = 40
+    this.alto = 40
     this.tarjeta = tarjeta
-    this.x = 20
-    this.y = 30
-    this.ancho = 80
-    this.alto = 80
+    this.x = aleatorio(0, mapa.width - this.ancho)
+    this.y = aleatorio(0, mapa.height - this.alto)
     this.mapaFoto = new Image()
-    this.mapaFoto.src = foto
+    this.mapaFoto.src = fotoMapa
     this.velocidadX = 0
     this.velocidadY = 0
+
+  }
+  pintarSer() {
+    lienzo.drawImage(
+      this.mapaFoto,
+      this.x,
+      this.y,
+      this.ancho,
+      this.alto
+  
+    )
   }
 }
 
 
-let demonio = new Ser('Demonio', 'assets/demonio.avif', 5, "tarjetasSerDemonio", )
+let demonio = new Ser('Demonio', 'assets/demonio.avif', 5, "tarjetasSerDemonio", 'assets/caraDemonio')
 
-let angel = new Ser('Angel', 'assets/angel.jpg', 5, 'tarjetasSerAngel')
+let angel = new Ser('Angel', 'assets/angel.jpg', 5, 'tarjetasSerAngel', 'assets/caraDemonio')
 
-let humano = new Ser('Humano', 'assets/humano.jpg', 5, 'tarjetasSerHumano')
+let humano = new Ser('Humano', 'assets/humano.jpg', 5, 'tarjetasSerHumano', 'assets/caraDemonio')
 
-let demonioE = new Ser('Demonio', 'assets/demonio.avif', 5, "tarjetasSerDemonio", )
+let demonioE = new Ser('Demonio', 'assets/demonio.avif', 5, "tarjetasSerDemonio",'assets/caraDemonio')
 
-let angelE = new Ser('Angel', 'assets/angel.jpg', 5, 'tarjetasSerAngel')
+let angelE = new Ser('Angel', 'assets/angel.jpg', 5, 'tarjetasSerAngel', 'assets/caraDemonio')
 
-let humanoE = new Ser('Humano', 'assets/humano.jpg', 5, 'tarjetasSerHumano')
-
+let humanoE = new Ser('Humano', 'assets/humano.jpg', 5, 'tarjetasSerHumano', 'assets/caraDemonio')
 demonio.habilidad.push (
+  {nombre: '💪', id: 'boton-fuerza', class: 'tarjetasPeleaA'},
+  {nombre: '💪', id: 'boton-fuerza', class: 'tarjetasPeleaA'},
+  {nombre: '💪', id: 'boton-fuerza', class: 'tarjetasPeleaA'}, 
+  {nombre: '🏃‍♂️', id: 'boton-velocidad', class: 'tarjetasPeleaB'},
+  {nombre: '🧠', id: 'boton-inteligencia', class: 'tarjetasPeleaC'}, 
+)
+demonioE.habilidad.push (
   {nombre: '💪', id: 'boton-fuerza', class: 'tarjetasPeleaA'},
   {nombre: '💪', id: 'boton-fuerza', class: 'tarjetasPeleaA'},
   {nombre: '💪', id: 'boton-fuerza', class: 'tarjetasPeleaA'}, 
@@ -101,6 +133,13 @@ angel.habilidad.push (
   {nombre: '💪', id: 'boton-fuerza', class: 'tarjetasPeleaA'}, 
   {nombre: '🧠', id: 'boton-inteligencia', class: 'tarjetasPeleaC'}, 
 )
+angelE.habilidad.push (
+  {nombre: '🏃‍♂️', id: 'boton-velocidad', class: 'tarjetasPeleaB'},
+  {nombre: '🏃‍♂️', id: 'boton-velocidad', class: 'tarjetasPeleaB'},
+  {nombre: '🏃‍♂️', id: 'boton-velocidad', class: 'tarjetasPeleaB'},
+  {nombre: '💪', id: 'boton-fuerza', class: 'tarjetasPeleaA'}, 
+  {nombre: '🧠', id: 'boton-inteligencia', class: 'tarjetasPeleaC'}, 
+)
 
 humano.habilidad.push (
   {nombre: '🧠', id: 'boton-inteligencia', class: 'tarjetasPeleaC'},
@@ -109,8 +148,15 @@ humano.habilidad.push (
   {nombre: '💪', id: 'boton-fuerza', class: 'tarjetasPeleaA'}, 
   {nombre: '🏃‍♂️', id: 'boton-velocidad', class: 'tarjetasPeleaB'},
 )
+humanoE.habilidad.push (
+  {nombre: '🧠', id: 'boton-inteligencia', class: 'tarjetasPeleaC'},
+  {nombre: '🧠', id: 'boton-inteligencia', class: 'tarjetasPeleaC'},
+  {nombre: '🧠', id: 'boton-inteligencia', class: 'tarjetasPeleaC'},
+  {nombre: '💪', id: 'boton-fuerza', class: 'tarjetasPeleaA'}, 
+  {nombre: '🏃‍♂️', id: 'boton-velocidad', class: 'tarjetasPeleaB'},
+)
 
-seres.push(demonio,angel,humano)
+seres.push(demonio,angel,humano,)
 
 function iniciarJuego () {
   sectionDestreza.style.display = 'none' 
@@ -171,7 +217,7 @@ function seleccionarSerJugador (){
       alert ('Selecciona cualquiera de los seres vivos')
     } 
     extraerHabilidad(serjugador123) 
-    serEnemigo()
+    //serEnemigo()
     iniciarMapa()
 }
 
@@ -235,18 +281,21 @@ function secuenciaAtaque(){
 function botonSeleccionar (){
     botonSerElegido.style.display = 'block'
 }
- function serEnemigo () {
-    let serEnemigo = aleatorio(0, seres.length -1)
+ function serEnemigo (enemigo) {
+    //let serEnemigo = aleatorio(0, seres.length -1)
+   // 
+    //spanSerEnemigo.innerHTML =  seres[serEnemigo].nombre1
+    //ataqueSerEnemigo = seres[serEnemigo].habilidad
+    spanSerEnemigo.innerHTML = enemigo.nombre1
+    ataqueSerEnemigo = enemigo.habilidad
     
-    spanSerEnemigo.innerHTML =  seres[serEnemigo].nombre1
-    ataqueSerEnemigo = seres[serEnemigo].habilidad
-
     secuenciaAtaque()
   
 }
 
 function habilidadAEnemigo () {
-   let habilidadAleatorio= aleatorio(0,ataqueSerEnemigo.length -1) 
+  console.log('ataquenemigo', ataqueSerEnemigo ) 
+  let habilidadAleatorio= aleatorio(0,ataqueSerEnemigo.length -1) 
    let spanHabilidadEnemigo = document.getElementById('habilidadPC')
    
    if (habilidadAleatorio == 0 || habilidadAleatorio == 1){
@@ -345,14 +394,16 @@ function reiniciarJuego (){
     mapa.width,
     mapa.height
   )
-  lienzo.drawImage(
-    serJugadorObjeto.mapaFoto,
-    serJugadorObjeto.x,
-    serJugadorObjeto.y,
-    serJugadorObjeto.ancho,
-    serJugadorObjeto.alto
-
-  )
+  serJugadorObjeto.pintarSer()
+  demonioE.pintarSer()
+  angelE.pintarSer()
+  humanoE.pintarSer()
+  if (serJugadorObjeto.velocidadX !== 0 || serJugadorObjeto.velocidadY !== 0) {
+    revisarColision(demonioE)
+    revisarColision(humanoE)
+    revisarColision(angelE)
+  }
+  
 
  }
 
@@ -395,8 +446,8 @@ function sePresionoUnaTecla(event){
 }
 
 function iniciarMapa(){
-  mapa.width = 320
-  mapa.height = 240
+  //mapa.width = 320
+  //mapa.height = 240
   serJugadorObjeto = obtenerObjetoSer(serjugador123)
   console.log(serJugadorObjeto, serjugador123);
   intervalo = setInterval(pintarCanvas, 50)
@@ -411,6 +462,33 @@ function obtenerObjetoSer(){
       return seres[i]
     }
   }
+}
+function revisarColision(enemigo) {
+  const arribaEnemigo = enemigo.y
+  const abajoEnemigo = enemigo.y + enemigo.alto
+  const derechaEnemigo = enemigo.x + enemigo.ancho
+  const izquierdaEnemigo = enemigo.x 
+  
+  const arribaSer = serJugadorObjeto.y
+  const abajoSer = serJugadorObjeto.y + serJugadorObjeto.alto
+  const derechaSer = serJugadorObjeto.x + serJugadorObjeto.ancho
+  const izquierdaSer = serJugadorObjeto.x 
+  
+  if (
+    abajoSer < arribaEnemigo || 
+    arribaSer > abajoEnemigo ||
+    derechaSer < izquierdaEnemigo ||
+    izquierdaSer> derechaEnemigo 
+  ) {
+    return
+  }
+  detenerMovimiento()
+  clearInterval(intervalo)
+  console.log('se detecto una coalision');
+  sectionDestreza.style.display = 'block' 
+  mapa.style.display = 'none'
+  verMapa.style.display = 'none'
+  serEnemigo(enemigo)
 }
 
 
