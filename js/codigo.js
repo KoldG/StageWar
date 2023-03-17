@@ -12,6 +12,8 @@ let botonInteligencia
 let ataqueSerEnemigo
 
 
+let jugadorId = null
+
 let indexAtaqueEnemigo
 let indexAtaqueJugador
 
@@ -189,11 +191,26 @@ function iniciarJuego () {
   inputHumano.addEventListener('click',botonSeleccionar)
   
   botonReiniciar.addEventListener('click', reiniciarJuego)
+  unirserAlJuego()
   
+}
+
+function unirserAlJuego(){
+  fetch("http://localhost:8080/unirse")
+    .then(function (res){
+      console.log(res)
+      if (res.ok){
+        res.text()
+          .then(function (respuesta){
+            console.log(respuesta)
+            jugadorId = respuesta
+          })
+      }
+    })
 }
   
 
-  function botonSeleccionar (){
+function botonSeleccionar (){
     botonSerElegido.style.display = 'block'
   
 }
@@ -216,9 +233,24 @@ function seleccionarSerJugador (){
     } else {
       alert ('Selecciona cualquiera de los seres vivos')
     } 
+
+    seleccionarSer(serjugador123)
+
     extraerHabilidad(serjugador123) 
     //serEnemigo()
     iniciarMapa()
+}
+
+function seleccionarSer(serjugador123){
+  fetch(`http://localhost:8080/ser/${jugadorId}`,{
+    method: "post",
+    headers: {
+      "Content-Type": "application/json"
+    }, 
+    body: JSON.stringify({
+      ser: serjugador123
+    })
+  });
 }
 
 function extraerHabilidad(serjugador123){
