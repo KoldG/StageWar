@@ -427,6 +427,9 @@ function reiniciarJuego (){
     mapa.height
   )
   serJugadorObjeto.pintarSer()
+
+    enviarPosicion(serJugadorObjeto.x, serJugadorObjeto.y)
+
   demonioE.pintarSer()
   angelE.pintarSer()
   humanoE.pintarSer()
@@ -437,6 +440,19 @@ function reiniciarJuego (){
   }
   
 
+ }
+
+ function enviarPosicion(x, y) {
+    fetch(`http://localhost:8080/ser/${jugadorId}/posicion`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        x,
+        y
+      })
+    })
  }
 
  function moverDerecha(){
